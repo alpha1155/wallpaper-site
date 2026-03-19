@@ -1,0 +1,65 @@
+{
+  "common": {
+    "siteName": "FondosHD",
+    "download": "Descargar",
+    "close": "Cerrar",
+    "search": "Buscar",
+    "searchPlaceholder": "Buscar fondos de pantalla...",
+    "loading": "Cargando...",
+    "noResults": "No se encontraron fondos de pantalla",
+    "viewAll": "Ver todos",
+    "backToHome": "Volver al inicio"
+  },
+  "nav": {
+    "home": "Inicio",
+    "desktop": "Escritorio",
+    "mobile": "Móvil",
+    "static": "Estático",
+    "dynamic": "Dinámico"
+  },
+  "home": {
+    "title": "Fondos de Pantalla HD",
+    "subtitle": "Descarga impresionantes fondos de pantalla para tu escritorio y dispositivos móviles",
+    "featured": "Fondos Destacados",
+    "latest": "Últimos Fondos",
+    "popular": "Fondos Populares"
+  },
+  "filters": {
+    "all": "Todos",
+    "device": "Dispositivo",
+    "type": "Tipo",
+    "desktop": "Escritorio",
+    "mobile": "Móvil",
+    "static": "Estático",
+    "dynamic": "Dinámico",
+    "resolution": "Resolución"
+  },
+  "wallpaper": {
+    "downloadOptions": "Opciones de descarga",
+    "resolution": "Resolución",
+    "type": "Tipo",
+    "device": "Dispositivo",
+    "tags": "Etiquetas",
+    "relatedWallpapers": "Fondos relacionados",
+    "notFound": "Fondo no encontrado",
+    "notFoundDesc": "El fondo de pantalla que buscas no existe o ha sido eliminado."
+  },
+  "footer": {
+    "description": "Tu fuente de fondos de pantalla de alta calidad",
+    "links": "Enlaces rápidos",
+    "legal": "Legal",
+    "privacy": "Política de privacidad",
+    "terms": "Términos de servicio",
+    "contact": "Contacto",
+    "copyright": "Todos los derechos reservados"
+  },
+  "meta": {
+    "homeTitle": "Fondos de Pantalla HD para Escritorio y Móvil",
+    "homeDesc": "Descarga impresionantes fondos de pantalla de alta calidad para escritorio y dispositivos móviles. Miles de fondos estáticos y dinámicos en 4K, QHD y Full HD.",
+    "desktopTitle": "Fondos de Escritorio",
+    "desktopDesc": "Explora y descarga fondos de pantalla de alta calidad para escritorio en resoluciones 4K, QHD y Full HD.",
+    "mobileTitle": "Fondos de Móvil",
+    "mobileDesc": "Explora y descarga hermosos fondos de pantalla móviles para dispositivos iPhone y Android.",
+    "searchTitle": "Buscar Fondos"
+  }
+}

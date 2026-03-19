@@ -1,0 +1,65 @@
+{
+  "common": {
+    "siteName": "WallpaperHD",
+    "download": "Download",
+    "close": "Close",
+    "search": "Search",
+    "searchPlaceholder": "Search wallpapers...",
+    "loading": "Loading...",
+    "noResults": "No wallpapers found",
+    "viewAll": "View All",
+    "backToHome": "Back to Home"
+  },
+  "nav": {
+    "home": "Home",
+    "desktop": "Desktop",
+    "mobile": "Mobile",
+    "static": "Static",
+    "dynamic": "Dynamic"
+  },
+  "home": {
+    "title": "High Quality Wallpapers",
+    "subtitle": "Download stunning wallpapers for your desktop and mobile devices",
+    "featured": "Featured Wallpapers",
+    "latest": "Latest Wallpapers",
+    "popular": "Popular Wallpapers"
+  },
+  "filters": {
+    "all": "All",
+    "device": "Device",
+    "type": "Type",
+    "desktop": "Desktop",
+    "mobile": "Mobile",
+    "static": "Static",
+    "dynamic": "Dynamic",
+    "resolution": "Resolution"
+  },
+  "wallpaper": {
+    "downloadOptions": "Download Options",
+    "resolution": "Resolution",
+    "type": "Type",
+    "device": "Device",
+    "tags": "Tags",
+    "relatedWallpapers": "Related Wallpapers",
+    "notFound": "Wallpaper not found",
+    "notFoundDesc": "The wallpaper you're looking for doesn't exist or has been removed."
+  },
+  "footer": {
+    "description": "Your source for high-quality wallpapers",
+    "links": "Quick Links",
+    "legal": "Legal",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Service",
+    "contact": "Contact",
+    "copyright": "All rights reserved"
+  },
+  "meta": {
+    "homeTitle": "High Quality Wallpapers for Desktop & Mobile",
+    "homeDesc": "Download stunning high-quality wallpapers for desktop and mobile devices. Browse thousands of static and dynamic wallpapers in 4K, QHD, and Full HD resolutions.",
+    "desktopTitle": "Desktop Wallpapers",
+    "desktopDesc": "Browse and download high-quality desktop wallpapers in 4K, QHD, and Full HD resolutions.",
+    "mobileTitle": "Mobile Wallpapers",
+    "mobileDesc": "Browse and download beautiful mobile wallpapers for iPhone and Android devices.",
+    "searchTitle": "Search Wallpapers"
+  }
+}

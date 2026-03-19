@@ -1,106 +1,83 @@
 "use client";
 
-import { useCallback } from "react";
-import { Monitor, Smartphone, ImageIcon, Play, LayoutGrid } from "lucide-react";
+import { useTranslations } from "next-intl";
+import { Monitor, Smartphone, Image, Video } from "lucide-react";
+import { useWallpaperStore } from "@/store/wallpaper-store";
 import { cn } from "@/lib/utils";
-import type { WallpaperFilters as Filters, DeviceType, WallpaperType } from "@/types/wallpaper";
 
-interface WallpaperFiltersProps {
-  filters: Filters;
-  onFilterChange: (filters: Filters) => void;
-  showTypeFilter?: boolean;
-}
+export function WallpaperFilters() {
+  const t = useTranslations("filters");
+  const { filters, setFilters } = useWallpaperStore();
 
-interface FilterButtonProps {
-  active: boolean;
-  onClick: () => void;
-  icon: React.ReactNode;
-  label: string;
-}
+  const deviceOptions = [
+    { value: "all", label: t("all"), icon: null },
+    { value: "desktop", label: t("desktop"), icon: Monitor },
+    { value: "mobile", label: t("mobile"), icon: Smartphone },
+  ];
 
-function FilterButton({ active, onClick, icon, label }: FilterButtonProps) {
-  return (
-    <button
-      onClick={onClick}
-      className={cn(
-        "inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium transition-all duration-200",
-        active
-          ? "bg-primary-500 text-white shadow-md shadow-primary-500/25"
-          : "bg-surface-100 dark:bg-surface-800 text-surface-600 dark:text-surface-400 hover:bg-surface-200 dark:hover:bg-surface-700"
-      )}
-    >
-      {icon}
-      <span className="hidden sm:inline">{label}</span>
-    </button>
-  );
-}
-
-export function WallpaperFilters({
-  filters,
-  onFilterChange,
-  showTypeFilter = true,
-}: WallpaperFiltersProps) {
-  const handleDeviceChange = useCallback(
-    (device: DeviceType | "all") => {
-      onFilterChange({ ...filters, device });
-    },
-    [filters, onFilterChange]
-  );
-
-  const handleTypeChange = useCallback(
-    (type: WallpaperType | "all") => {
-      onFilterChange({ ...filters, type });
-    },
-    [filters, onFilterChange]
-  );
+  const typeOptions = [
+    { value: "all", label: t("all"), icon: null },
+    { value: "static", label: t("static"), icon: Image },
+    { value: "dynamic", label: t("dynamic"), icon: Video },
+  ];
 
   return (
-    <div className="flex flex-col sm:flex-row gap-4 sm:items-center sm:justify-between">
-      {/* Device filters */}
-      <div className="flex flex-wrap gap-2">
-        <FilterButton
-          active={filters.device === "all" || !filters.device}
-          onClick={() => handleDeviceChange("all")}
-          icon={<LayoutGrid className="w-4 h-4" />}
-          label="All"
-        />
-        <FilterButton
-          active={filters.device === "desktop"}
-          onClick={() => handleDeviceChange("desktop")}
-          icon={<Monitor className="w-4 h-4" />}
-          label="Desktop"
-        />
-        <FilterButton
-          active={filters.device === "mobile"}
-          onClick={() => handleDeviceChange("mobile")}
-          icon={<Smartphone className="w-4 h-4" />}
-          label="Mobile"
-        />
+    <div className="flex flex-wrap gap-4 mb-8 p-4 bg-gray-50 dark:bg-gray-900 rounded-xl">
+      {/* Device Filter */}
+      <div className="flex items-center gap-2">
+        <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
+          {t("device")}:
+        </span>
+        <div className="flex gap-1">
+          {deviceOptions.map((option) => (
+            <button
+              key={option.value}
+              onClick={() =>
+                setFilters({
+                  device: option.value as "all" | "desktop" | "mobile",
+                })
+              }
+              className={cn(
+                "flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm transition-colors",
+                filters.device === option.value
+                  ? "bg-purple-600 text-white"
+                  : "bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
+              )}
+            >
+              {option.icon && <option.icon className="w-4 h-4" />}
+              {option.label}
+            </button>
+          ))}
+        </div>
       </div>
 
-      {/* Type filters */}
-      {showTypeFilter && (
-        <div className="flex flex-wrap gap-2">
-          <FilterButton
-            active={filters.type === "all" || !filters.type}
-            onClick={() => handleTypeChange("all")}
-            icon={<LayoutGrid className="w-4 h-4" />}
-            label="All Types"
-          />
-          <FilterButton
-            active={filters.type === "static"}
-            onClick={() => handleTypeChange("static")}
-            icon={<ImageIcon className="w-4 h-4" />}
-            label="Static"
-          />
-          <FilterButton
-            active={filters.type === "dynamic"}
-            onClick={() => handleTypeChange("dynamic")}
-            icon={<Play className="w-4 h-4" />}
-            label="Dynamic"
-          />
+      {/* Type Filter */}
+      <div className="flex items-center gap-2">
+        <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
+          {t("type")}:
+        </span>
+        <div className="flex gap-1">
+          {typeOptions.map((option) => (
+            <button
+              key={option.value}
+              onClick={() =>
+                setFilters({
+                  type: option.value as "all" | "static" | "dynamic",
+                })
+              }
+              className={cn(
+                "flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm transition-colors",
+                filters.type === option.value
+                  ? "bg-purple-600 text-white"
+                  : "bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
+              )}
+            >
+              {option.icon && <option.icon className="w-4 h-4" />}
+              {option.label}
+            </button>
+          ))}
         </div>
-      )}
+      </div>
     </div>
   );
 }

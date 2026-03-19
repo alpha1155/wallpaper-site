@@ -1,47 +1,25 @@
+import createNextIntlPlugin from 'next-intl/plugin';
+
+const withNextIntl = createNextIntlPlugin('./src/i18n/request.ts');
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
     remotePatterns: [
       {
-        protocol: "https",
-        hostname: "images.unsplash.com",
+        protocol: 'https',
+        hostname: '*.r2.cloudflarestorage.com',
       },
       {
-        protocol: "https",
-        hostname: "*.r2.cloudflarestorage.com",
+        protocol: 'https',
+        hostname: 'images.unsplash.com',
       },
       {
-        protocol: "https",
-        hostname: "*.supabase.co",
+        protocol: 'https',
+        hostname: 'picsum.photos',
       },
     ],
   },
-  // Enable React strict mode for better development experience
-  reactStrictMode: true,
-  // Optimize production builds
-  poweredByHeader: false,
-  // Configure headers for security
-  async headers() {
-    return [
-      {
-        source: "/:path*",
-        headers: [
-          {
-            key: "X-DNS-Prefetch-Control",
-            value: "on",
-          },
-          {
-            key: "X-Content-Type-Options",
-            value: "nosniff",
-          },
-          {
-            key: "Referrer-Policy",
-            value: "origin-when-cross-origin",
-          },
-        ],
-      },
-    ];
-  },
 };
 
-export default nextConfig;
+export default withNextIntl(nextConfig);

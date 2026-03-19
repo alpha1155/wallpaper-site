@@ -1,0 +1,65 @@
+{
+  "common": {
+    "siteName": "高清壁纸",
+    "download": "下载",
+    "close": "关闭",
+    "search": "搜索",
+    "searchPlaceholder": "搜索壁纸...",
+    "loading": "加载中...",
+    "noResults": "未找到壁纸",
+    "viewAll": "查看全部",
+    "backToHome": "返回首页"
+  },
+  "nav": {
+    "home": "首页",
+    "desktop": "桌面",
+    "mobile": "手机",
+    "static": "静态",
+    "dynamic": "动态"
+  },
+  "home": {
+    "title": "高清壁纸下载",
+    "subtitle": "为您的桌面和移动设备下载精美壁纸",
+    "featured": "精选壁纸",
+    "latest": "最新壁纸",
+    "popular": "热门壁纸"
+  },
+  "filters": {
+    "all": "全部",
+    "device": "设备",
+    "type": "类型",
+    "desktop": "桌面",
+    "mobile": "手机",
+    "static": "静态",
+    "dynamic": "动态",
+    "resolution": "分辨率"
+  },
+  "wallpaper": {
+    "downloadOptions": "下载选项",
+    "resolution": "分辨率",
+    "type": "类型",
+    "device": "设备",
+    "tags": "标签",
+    "relatedWallpapers": "相关壁纸",
+    "notFound": "壁纸未找到",
+    "notFoundDesc": "您查找的壁纸不存在或已被删除。"
+  },
+  "footer": {
+    "description": "您的高清壁纸来源",
+    "links": "快速链接",
+    "legal": "法律信息",
+    "privacy": "隐私政策",
+    "terms": "服务条款",
+    "contact": "联系我们",
+    "copyright": "版权所有"
+  },
+  "meta": {
+    "homeTitle": "高清桌面和手机壁纸下载",
+    "homeDesc": "下载精美的高清壁纸，支持桌面和移动设备。浏览数千张4K、2K、全高清静态和动态壁纸。",
+    "desktopTitle": "桌面壁纸",
+    "desktopDesc": "浏览和下载高清桌面壁纸，支持4K、2K、全高清分辨率。",
+    "mobileTitle": "手机壁纸",
+    "mobileDesc": "浏览和下载精美手机壁纸，支持 iPhone 和 Android 设备。",
+    "searchTitle": "搜索壁纸"
+  }
+}
