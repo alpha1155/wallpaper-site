@@ -1,396 +1,368 @@
-import type { Wallpaper } from "@/types/wallpaper";
+import { Character, Wallpaper, Element, Region, WeaponType } from '@/types/genshin';
 
-export const mockWallpapers: Wallpaper[] = [
-  // Desktop Static Wallpapers
+// 示例角色数据
+export const mockCharacters: Character[] = [
   {
-    id: "1",
-    title: "Mountain Sunrise",
-    slug: "mountain-sunrise",
-    type: "static",
-    device: "desktop",
-    thumbnail_url: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&q=80",
-    preview_url: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1200&q=90",
-    download_urls: {
-      "1920x1080": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1920&q=100",
-      "2560x1440": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=2560&q=100",
-      "3840x2160": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=3840&q=100",
-    },
-    tags: ["nature", "mountains", "sunrise", "landscape"],
-    featured: true,
-    created_at: "2024-01-15T10:00:00Z",
-    views: 15420,
-    downloads: 3240,
+    id: 'raiden-shogun',
+    name: 'Raiden Shogun',
+    name_cn: '雷电将军',
+    name_jp: '雷電将軍',
+    element: 'electro',
+    weapon: 'polearm',
+    rarity: 5,
+    region: 'inazuma',
+    release_version: '2.1',
+    avatar_url: 'https://images.unsplash.com/photo-1578632767115-351597cf2477?w=200&h=200&fit=crop',
+    created_at: '2021-09-01',
   },
   {
-    id: "2",
-    title: "Ocean Waves",
-    slug: "ocean-waves",
-    type: "static",
-    device: "desktop",
-    thumbnail_url: "https://images.unsplash.com/photo-1505118380757-91f5f5632de0?w=400&q=80",
-    preview_url: "https://images.unsplash.com/photo-1505118380757-91f5f5632de0?w=1200&q=90",
-    download_urls: {
-      "1920x1080": "https://images.unsplash.com/photo-1505118380757-91f5f5632de0?w=1920&q=100",
-      "2560x1440": "https://images.unsplash.com/photo-1505118380757-91f5f5632de0?w=2560&q=100",
-      "3840x2160": "https://images.unsplash.com/photo-1505118380757-91f5f5632de0?w=3840&q=100",
-    },
-    tags: ["nature", "ocean", "waves", "blue"],
-    featured: true,
-    created_at: "2024-01-14T10:00:00Z",
-    views: 12300,
-    downloads: 2890,
+    id: 'hu-tao',
+    name: 'Hu Tao',
+    name_cn: '胡桃',
+    name_jp: '胡桃',
+    element: 'pyro',
+    weapon: 'polearm',
+    rarity: 5,
+    region: 'liyue',
+    release_version: '1.3',
+    avatar_url: 'https://images.unsplash.com/photo-1578632767115-351597cf2477?w=200&h=200&fit=crop',
+    created_at: '2021-03-02',
   },
   {
-    id: "3",
-    title: "Northern Lights",
-    slug: "northern-lights",
-    type: "static",
-    device: "desktop",
-    thumbnail_url: "https://images.unsplash.com/photo-1531366936337-7c912a4589a7?w=400&q=80",
-    preview_url: "https://images.unsplash.com/photo-1531366936337-7c912a4589a7?w=1200&q=90",
-    download_urls: {
-      "1920x1080": "https://images.unsplash.com/photo-1531366936337-7c912a4589a7?w=1920&q=100",
-      "2560x1440": "https://images.unsplash.com/photo-1531366936337-7c912a4589a7?w=2560&q=100",
-      "3840x2160": "https://images.unsplash.com/photo-1531366936337-7c912a4589a7?w=3840&q=100",
-    },
-    tags: ["nature", "aurora", "night", "sky"],
-    featured: true,
-    created_at: "2024-01-13T10:00:00Z",
-    views: 18900,
-    downloads: 4100,
+    id: 'nahida',
+    name: 'Nahida',
+    name_cn: '纳西妲',
+    name_jp: 'ナヒーダ',
+    element: 'dendro',
+    weapon: 'catalyst',
+    rarity: 5,
+    region: 'sumeru',
+    release_version: '3.2',
+    avatar_url: 'https://images.unsplash.com/photo-1578632767115-351597cf2477?w=200&h=200&fit=crop',
+    created_at: '2022-11-02',
   },
   {
-    id: "4",
-    title: "Forest Path",
-    slug: "forest-path",
-    type: "static",
-    device: "desktop",
-    thumbnail_url: "https://images.unsplash.com/photo-1448375240586-882707db888b?w=400&q=80",
-    preview_url: "https://images.unsplash.com/photo-1448375240586-882707db888b?w=1200&q=90",
-    download_urls: {
-      "1920x1080": "https://images.unsplash.com/photo-1448375240586-882707db888b?w=1920&q=100",
-      "2560x1440": "https://images.unsplash.com/photo-1448375240586-882707db888b?w=2560&q=100",
-      "3840x2160": "https://images.unsplash.com/photo-1448375240586-882707db888b?w=3840&q=100",
-    },
-    tags: ["nature", "forest", "trees", "green"],
-    featured: false,
-    created_at: "2024-01-12T10:00:00Z",
-    views: 9800,
-    downloads: 2100,
+    id: 'furina',
+    name: 'Furina',
+    name_cn: '芙宁娜',
+    name_jp: 'フリーナ',
+    element: 'hydro',
+    weapon: 'sword',
+    rarity: 5,
+    region: 'fontaine',
+    release_version: '4.2',
+    avatar_url: 'https://images.unsplash.com/photo-1578632767115-351597cf2477?w=200&h=200&fit=crop',
+    created_at: '2023-11-08',
   },
   {
-    id: "5",
-    title: "City Skyline Night",
-    slug: "city-skyline-night",
-    type: "static",
-    device: "desktop",
-    thumbnail_url: "https://images.unsplash.com/photo-1519501025264-65ba15a82390?w=400&q=80",
-    preview_url: "https://images.unsplash.com/photo-1519501025264-65ba15a82390?w=1200&q=90",
-    download_urls: {
-      "1920x1080": "https://images.unsplash.com/photo-1519501025264-65ba15a82390?w=1920&q=100",
-      "2560x1440": "https://images.unsplash.com/photo-1519501025264-65ba15a82390?w=2560&q=100",
-      "3840x2160": "https://images.unsplash.com/photo-1519501025264-65ba15a82390?w=3840&q=100",
-    },
-    tags: ["city", "urban", "night", "lights"],
-    featured: false,
-    created_at: "2024-01-11T10:00:00Z",
-    views: 7600,
-    downloads: 1800,
+    id: 'kazuha',
+    name: 'Kaedehara Kazuha',
+    name_cn: '枫原万叶',
+    name_jp: '楓原万葉',
+    element: 'anemo',
+    weapon: 'sword',
+    rarity: 5,
+    region: 'inazuma',
+    release_version: '1.6',
+    avatar_url: 'https://images.unsplash.com/photo-1578632767115-351597cf2477?w=200&h=200&fit=crop',
+    created_at: '2021-06-29',
   },
   {
-    id: "6",
-    title: "Abstract Geometry",
-    slug: "abstract-geometry",
-    type: "static",
-    device: "desktop",
-    thumbnail_url: "https://images.unsplash.com/photo-1550684376-efcbd6e3f031?w=400&q=80",
-    preview_url: "https://images.unsplash.com/photo-1550684376-efcbd6e3f031?w=1200&q=90",
-    download_urls: {
-      "1920x1080": "https://images.unsplash.com/photo-1550684376-efcbd6e3f031?w=1920&q=100",
-      "2560x1440": "https://images.unsplash.com/photo-1550684376-efcbd6e3f031?w=2560&q=100",
-      "3840x2160": "https://images.unsplash.com/photo-1550684376-efcbd6e3f031?w=3840&q=100",
-    },
-    tags: ["abstract", "geometric", "colorful", "modern"],
-    featured: true,
-    created_at: "2024-01-10T10:00:00Z",
-    views: 11200,
-    downloads: 2650,
+    id: 'ayaka',
+    name: 'Kamisato Ayaka',
+    name_cn: '神里绫华',
+    name_jp: '神里綾華',
+    element: 'cryo',
+    weapon: 'sword',
+    rarity: 5,
+    region: 'inazuma',
+    release_version: '2.0',
+    avatar_url: 'https://images.unsplash.com/photo-1578632767115-351597cf2477?w=200&h=200&fit=crop',
+    created_at: '2021-07-21',
   },
   {
-    id: "7",
-    title: "Desert Dunes",
-    slug: "desert-dunes",
-    type: "static",
-    device: "desktop",
-    thumbnail_url: "https://images.unsplash.com/photo-1509316785289-025f5b846b35?w=400&q=80",
-    preview_url: "https://images.unsplash.com/photo-1509316785289-025f5b846b35?w=1200&q=90",
-    download_urls: {
-      "1920x1080": "https://images.unsplash.com/photo-1509316785289-025f5b846b35?w=1920&q=100",
-      "2560x1440": "https://images.unsplash.com/photo-1509316785289-025f5b846b35?w=2560&q=100",
-      "3840x2160": "https://images.unsplash.com/photo-1509316785289-025f5b846b35?w=3840&q=100",
-    },
-    tags: ["nature", "desert", "sand", "minimal"],
-    featured: false,
-    created_at: "2024-01-09T10:00:00Z",
-    views: 6400,
-    downloads: 1400,
+    id: 'zhongli',
+    name: 'Zhongli',
+    name_cn: '钟离',
+    name_jp: '鍾離',
+    element: 'geo',
+    weapon: 'polearm',
+    rarity: 5,
+    region: 'liyue',
+    release_version: '1.1',
+    avatar_url: 'https://images.unsplash.com/photo-1578632767115-351597cf2477?w=200&h=200&fit=crop',
+    created_at: '2020-12-01',
   },
   {
-    id: "8",
-    title: "Starry Galaxy",
-    slug: "starry-galaxy",
-    type: "static",
-    device: "desktop",
-    thumbnail_url: "https://images.unsplash.com/photo-1462331940025-496dfbfc7564?w=400&q=80",
-    preview_url: "https://images.unsplash.com/photo-1462331940025-496dfbfc7564?w=1200&q=90",
-    download_urls: {
-      "1920x1080": "https://images.unsplash.com/photo-1462331940025-496dfbfc7564?w=1920&q=100",
-      "2560x1440": "https://images.unsplash.com/photo-1462331940025-496dfbfc7564?w=2560&q=100",
-      "3840x2160": "https://images.unsplash.com/photo-1462331940025-496dfbfc7564?w=3840&q=100",
-    },
-    tags: ["space", "galaxy", "stars", "night"],
-    featured: true,
-    created_at: "2024-01-08T10:00:00Z",
-    views: 21500,
-    downloads: 5200,
-  },
-
-  // Mobile Static Wallpapers
-  {
-    id: "9",
-    title: "Pink Sakura",
-    slug: "pink-sakura",
-    type: "static",
-    device: "mobile",
-    thumbnail_url: "https://images.unsplash.com/photo-1522383225653-ed111181a951?w=400&q=80",
-    preview_url: "https://images.unsplash.com/photo-1522383225653-ed111181a951?w=800&q=90",
-    download_urls: {
-      "1080x1920": "https://images.unsplash.com/photo-1522383225653-ed111181a951?w=1080&q=100",
-      "1440x2560": "https://images.unsplash.com/photo-1522383225653-ed111181a951?w=1440&q=100",
-    },
-    tags: ["nature", "flowers", "pink", "spring"],
-    featured: true,
-    created_at: "2024-01-07T10:00:00Z",
-    views: 14200,
-    downloads: 3800,
-  },
-  {
-    id: "10",
-    title: "Neon City",
-    slug: "neon-city",
-    type: "static",
-    device: "mobile",
-    thumbnail_url: "https://images.unsplash.com/photo-1545486332-9e0999c535b2?w=400&q=80",
-    preview_url: "https://images.unsplash.com/photo-1545486332-9e0999c535b2?w=800&q=90",
-    download_urls: {
-      "1080x1920": "https://images.unsplash.com/photo-1545486332-9e0999c535b2?w=1080&q=100",
-      "1440x2560": "https://images.unsplash.com/photo-1545486332-9e0999c535b2?w=1440&q=100",
-    },
-    tags: ["city", "neon", "night", "cyberpunk"],
-    featured: true,
-    created_at: "2024-01-06T10:00:00Z",
-    views: 16800,
-    downloads: 4200,
-  },
-  {
-    id: "11",
-    title: "Minimal Gradient",
-    slug: "minimal-gradient",
-    type: "static",
-    device: "mobile",
-    thumbnail_url: "https://images.unsplash.com/photo-1557682250-33bd709cbe85?w=400&q=80",
-    preview_url: "https://images.unsplash.com/photo-1557682250-33bd709cbe85?w=800&q=90",
-    download_urls: {
-      "1080x1920": "https://images.unsplash.com/photo-1557682250-33bd709cbe85?w=1080&q=100",
-      "1440x2560": "https://images.unsplash.com/photo-1557682250-33bd709cbe85?w=1440&q=100",
-    },
-    tags: ["abstract", "gradient", "minimal", "purple"],
-    featured: false,
-    created_at: "2024-01-05T10:00:00Z",
-    views: 8900,
-    downloads: 2300,
-  },
-  {
-    id: "12",
-    title: "Tropical Beach",
-    slug: "tropical-beach",
-    type: "static",
-    device: "mobile",
-    thumbnail_url: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=400&q=80",
-    preview_url: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&q=90",
-    download_urls: {
-      "1080x1920": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1080&q=100",
-      "1440x2560": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1440&q=100",
-    },
-    tags: ["nature", "beach", "tropical", "summer"],
-    featured: false,
-    created_at: "2024-01-04T10:00:00Z",
-    views: 7200,
-    downloads: 1900,
-  },
-  {
-    id: "13",
-    title: "Dark Botanical",
-    slug: "dark-botanical",
-    type: "static",
-    device: "mobile",
-    thumbnail_url: "https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?w=400&q=80",
-    preview_url: "https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?w=800&q=90",
-    download_urls: {
-      "1080x1920": "https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?w=1080&q=100",
-      "1440x2560": "https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?w=1440&q=100",
-    },
-    tags: ["nature", "plants", "dark", "botanical"],
-    featured: true,
-    created_at: "2024-01-03T10:00:00Z",
-    views: 12400,
-    downloads: 3100,
-  },
-
-  // Both (Universal) Wallpapers
-  {
-    id: "14",
-    title: "Sunset Over Mountains",
-    slug: "sunset-mountains",
-    type: "static",
-    device: "both",
-    thumbnail_url: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=400&q=80",
-    preview_url: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=1200&q=90",
-    download_urls: {
-      "1080x1920": "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=1080&q=100",
-      "1440x2560": "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=1440&q=100",
-      "1920x1080": "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=1920&q=100",
-      "2560x1440": "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=2560&q=100",
-      "3840x2160": "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=3840&q=100",
-    },
-    tags: ["nature", "mountains", "sunset", "landscape"],
-    featured: true,
-    created_at: "2024-01-02T10:00:00Z",
-    views: 24600,
-    downloads: 6100,
-  },
-  {
-    id: "15",
-    title: "Dark Space Nebula",
-    slug: "dark-space-nebula",
-    type: "static",
-    device: "both",
-    thumbnail_url: "https://images.unsplash.com/photo-1465101162946-4377e57745c3?w=400&q=80",
-    preview_url: "https://images.unsplash.com/photo-1465101162946-4377e57745c3?w=1200&q=90",
-    download_urls: {
-      "1080x1920": "https://images.unsplash.com/photo-1465101162946-4377e57745c3?w=1080&q=100",
-      "1440x2560": "https://images.unsplash.com/photo-1465101162946-4377e57745c3?w=1440&q=100",
-      "1920x1080": "https://images.unsplash.com/photo-1465101162946-4377e57745c3?w=1920&q=100",
-      "2560x1440": "https://images.unsplash.com/photo-1465101162946-4377e57745c3?w=2560&q=100",
-      "3840x2160": "https://images.unsplash.com/photo-1465101162946-4377e57745c3?w=3840&q=100",
-    },
-    tags: ["space", "nebula", "dark", "stars"],
-    featured: true,
-    created_at: "2024-01-01T10:00:00Z",
-    views: 28900,
-    downloads: 7200,
-  },
-
-  // Dynamic Wallpapers
-  {
-    id: "16",
-    title: "Flowing Water",
-    slug: "flowing-water",
-    type: "dynamic",
-    device: "desktop",
-    thumbnail_url: "https://images.unsplash.com/photo-1432405972618-c60b0225b8f9?w=400&q=80",
-    preview_url: "https://images.unsplash.com/photo-1432405972618-c60b0225b8f9?w=1200&q=90",
-    download_urls: {
-      "1920x1080": "/videos/flowing-water-1080p.mp4",
-      "2560x1440": "/videos/flowing-water-1440p.mp4",
-    },
-    tags: ["nature", "water", "relaxing", "animated"],
-    featured: true,
-    created_at: "2023-12-30T10:00:00Z",
-    views: 19200,
-    downloads: 4800,
-  },
-  {
-    id: "17",
-    title: "Rain on Window",
-    slug: "rain-window",
-    type: "dynamic",
-    device: "mobile",
-    thumbnail_url: "https://images.unsplash.com/photo-1515694346937-94d85e41e6f0?w=400&q=80",
-    preview_url: "https://images.unsplash.com/photo-1515694346937-94d85e41e6f0?w=800&q=90",
-    download_urls: {
-      "1080x1920": "/videos/rain-window-mobile.mp4",
-    },
-    tags: ["nature", "rain", "cozy", "animated"],
-    featured: false,
-    created_at: "2023-12-29T10:00:00Z",
-    views: 8700,
-    downloads: 2100,
-  },
-  {
-    id: "18",
-    title: "Fireplace Flames",
-    slug: "fireplace-flames",
-    type: "dynamic",
-    device: "both",
-    thumbnail_url: "https://images.unsplash.com/photo-1543459176-4426b37223ba?w=400&q=80",
-    preview_url: "https://images.unsplash.com/photo-1543459176-4426b37223ba?w=1200&q=90",
-    download_urls: {
-      "1080x1920": "/videos/fireplace-mobile.mp4",
-      "1920x1080": "/videos/fireplace-desktop.mp4",
-    },
-    tags: ["cozy", "fire", "warm", "animated"],
-    featured: true,
-    created_at: "2023-12-28T10:00:00Z",
-    views: 22100,
-    downloads: 5400,
+    id: 'xiao',
+    name: 'Xiao',
+    name_cn: '魈',
+    name_jp: '魈',
+    element: 'anemo',
+    weapon: 'polearm',
+    rarity: 5,
+    region: 'liyue',
+    release_version: '1.3',
+    avatar_url: 'https://images.unsplash.com/photo-1578632767115-351597cf2477?w=200&h=200&fit=crop',
+    created_at: '2021-02-03',
   },
 ];
 
-export function getMockWallpapers(filters?: {
-  device?: string;
-  type?: string;
-  search?: string;
-}): Wallpaper[] {
-  let result = [...mockWallpapers];
+// 示例壁纸数据
+export const mockWallpapers: Wallpaper[] = [
+  {
+    id: '1',
+    title: 'Raiden Shogun - Eternal Euthymia',
+    slug: 'raiden-shogun-eternal-euthymia',
+    character_ids: ['raiden-shogun'],
+    element: 'electro',
+    region: 'inazuma',
+    source: 'official',
+    thumbnail_url: 'https://images.unsplash.com/photo-1534796636912-3b95b3ab5986?w=400&h=600&fit=crop',
+    preview_url: 'https://images.unsplash.com/photo-1534796636912-3b95b3ab5986?w=1920&h=1080&fit=crop',
+    download_urls: {
+      mobile: 'https://images.unsplash.com/photo-1534796636912-3b95b3ab5986?w=1080&h=1920&fit=crop',
+      desktop: 'https://images.unsplash.com/photo-1534796636912-3b95b3ab5986?w=1920&h=1080&fit=crop',
+      desktop_4k: 'https://images.unsplash.com/photo-1534796636912-3b95b3ab5986?w=3840&h=2160&fit=crop',
+    },
+    tags: ['raiden', 'electro', 'inazuma', 'archon', 'purple'],
+    download_count: 12580,
+    view_count: 45600,
+    is_featured: true,
+    created_at: '2024-01-15',
+  },
+  {
+    id: '2',
+    title: 'Hu Tao - Ghost of Wangsheng',
+    slug: 'hu-tao-ghost-wangsheng',
+    character_ids: ['hu-tao'],
+    element: 'pyro',
+    region: 'liyue',
+    source: 'official',
+    thumbnail_url: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=600&fit=crop',
+    preview_url: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=1920&h=1080&fit=crop',
+    download_urls: {
+      mobile: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=1080&h=1920&fit=crop',
+      desktop: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=1920&h=1080&fit=crop',
+      desktop_4k: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=3840&h=2160&fit=crop',
+    },
+    tags: ['hu-tao', 'pyro', 'liyue', 'ghost', 'cute'],
+    download_count: 9870,
+    view_count: 32100,
+    is_featured: true,
+    created_at: '2024-01-10',
+  },
+  {
+    id: '3',
+    title: 'Nahida - Dendro Archon',
+    slug: 'nahida-dendro-archon',
+    character_ids: ['nahida'],
+    element: 'dendro',
+    region: 'sumeru',
+    source: 'official',
+    thumbnail_url: 'https://images.unsplash.com/photo-1518495973542-4542c06a5843?w=400&h=600&fit=crop',
+    preview_url: 'https://images.unsplash.com/photo-1518495973542-4542c06a5843?w=1920&h=1080&fit=crop',
+    download_urls: {
+      mobile: 'https://images.unsplash.com/photo-1518495973542-4542c06a5843?w=1080&h=1920&fit=crop',
+      desktop: 'https://images.unsplash.com/photo-1518495973542-4542c06a5843?w=1920&h=1080&fit=crop',
+      desktop_4k: 'https://images.unsplash.com/photo-1518495973542-4542c06a5843?w=3840&h=2160&fit=crop',
+    },
+    tags: ['nahida', 'dendro', 'sumeru', 'archon', 'green'],
+    download_count: 15230,
+    view_count: 52800,
+    is_featured: true,
+    created_at: '2024-02-01',
+  },
+  {
+    id: '4',
+    title: 'Furina - Hydro Archon',
+    slug: 'furina-hydro-archon',
+    character_ids: ['furina'],
+    element: 'hydro',
+    region: 'fontaine',
+    source: 'official',
+    thumbnail_url: 'https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=400&h=600&fit=crop',
+    preview_url: 'https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=1920&h=1080&fit=crop',
+    download_urls: {
+      mobile: 'https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=1080&h=1920&fit=crop',
+      desktop: 'https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=1920&h=1080&fit=crop',
+      desktop_4k: 'https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=3840&h=2160&fit=crop',
+    },
+    tags: ['furina', 'hydro', 'fontaine', 'archon', 'blue'],
+    download_count: 18500,
+    view_count: 61200,
+    is_featured: true,
+    created_at: '2024-02-15',
+  },
+  {
+    id: '5',
+    title: 'Kazuha - Autumn Leaves',
+    slug: 'kazuha-autumn-leaves',
+    character_ids: ['kazuha'],
+    element: 'anemo',
+    region: 'inazuma',
+    source: 'fanart',
+    artist_name: 'ArtistName',
+    artist_url: 'https://twitter.com/artist',
+    thumbnail_url: 'https://images.unsplash.com/photo-1507400492013-162706c8c05e?w=400&h=600&fit=crop',
+    preview_url: 'https://images.unsplash.com/photo-1507400492013-162706c8c05e?w=1920&h=1080&fit=crop',
+    download_urls: {
+      mobile: 'https://images.unsplash.com/photo-1507400492013-162706c8c05e?w=1080&h=1920&fit=crop',
+      desktop: 'https://images.unsplash.com/photo-1507400492013-162706c8c05e?w=1920&h=1080&fit=crop',
+    },
+    tags: ['kazuha', 'anemo', 'inazuma', 'maple', 'autumn'],
+    download_count: 7650,
+    view_count: 28900,
+    is_featured: false,
+    created_at: '2024-01-20',
+  },
+  {
+    id: '6',
+    title: 'Ayaka - Frostflake Sakura',
+    slug: 'ayaka-frostflake-sakura',
+    character_ids: ['ayaka'],
+    element: 'cryo',
+    region: 'inazuma',
+    source: 'official',
+    thumbnail_url: 'https://images.unsplash.com/photo-1519681393784-d120267933ba?w=400&h=600&fit=crop',
+    preview_url: 'https://images.unsplash.com/photo-1519681393784-d120267933ba?w=1920&h=1080&fit=crop',
+    download_urls: {
+      mobile: 'https://images.unsplash.com/photo-1519681393784-d120267933ba?w=1080&h=1920&fit=crop',
+      desktop: 'https://images.unsplash.com/photo-1519681393784-d120267933ba?w=1920&h=1080&fit=crop',
+      desktop_4k: 'https://images.unsplash.com/photo-1519681393784-d120267933ba?w=3840&h=2160&fit=crop',
+    },
+    tags: ['ayaka', 'cryo', 'inazuma', 'sakura', 'elegant'],
+    download_count: 11200,
+    view_count: 39500,
+    is_featured: true,
+    created_at: '2024-01-25',
+  },
+  {
+    id: '7',
+    title: 'Zhongli - Rex Lapis',
+    slug: 'zhongli-rex-lapis',
+    character_ids: ['zhongli'],
+    element: 'geo',
+    region: 'liyue',
+    source: 'official',
+    thumbnail_url: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=600&fit=crop',
+    preview_url: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1920&h=1080&fit=crop',
+    download_urls: {
+      mobile: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1080&h=1920&fit=crop',
+      desktop: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1920&h=1080&fit=crop',
+      desktop_4k: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=3840&h=2160&fit=crop',
+    },
+    tags: ['zhongli', 'geo', 'liyue', 'archon', 'contract'],
+    download_count: 14800,
+    view_count: 48700,
+    is_featured: true,
+    created_at: '2024-02-05',
+  },
+  {
+    id: '8',
+    title: 'Xiao - Vigilant Yaksha',
+    slug: 'xiao-vigilant-yaksha',
+    character_ids: ['xiao'],
+    element: 'anemo',
+    region: 'liyue',
+    source: 'ai',
+    thumbnail_url: 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=400&h=600&fit=crop',
+    preview_url: 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=1920&h=1080&fit=crop',
+    download_urls: {
+      mobile: 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=1080&h=1920&fit=crop',
+      desktop: 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=1920&h=1080&fit=crop',
+    },
+    tags: ['xiao', 'anemo', 'liyue', 'yaksha', 'mask'],
+    download_count: 8900,
+    view_count: 31200,
+    is_featured: false,
+    created_at: '2024-02-10',
+  },
+  {
+    id: '9',
+    title: 'Liyue Harbor Night',
+    slug: 'liyue-harbor-night',
+    character_ids: [],
+    region: 'liyue',
+    scene: 'Liyue Harbor',
+    source: 'screenshot',
+    thumbnail_url: 'https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=400&h=600&fit=crop',
+    preview_url: 'https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=1920&h=1080&fit=crop',
+    download_urls: {
+      mobile: 'https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=1080&h=1920&fit=crop',
+      desktop: 'https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=1920&h=1080&fit=crop',
+      desktop_4k: 'https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=3840&h=2160&fit=crop',
+      ultrawide: 'https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=3440&h=1440&fit=crop',
+    },
+    tags: ['liyue', 'harbor', 'night', 'scenery', 'city'],
+    download_count: 6500,
+    view_count: 22400,
+    is_featured: false,
+    created_at: '2024-01-28',
+  },
+  {
+    id: '10',
+    title: 'Inazuma Thunder Storm',
+    slug: 'inazuma-thunder-storm',
+    character_ids: [],
+    region: 'inazuma',
+    scene: 'Inazuma City',
+    source: 'screenshot',
+    thumbnail_url: 'https://images.unsplash.com/photo-1492011221367-f47e3ccd77a0?w=400&h=600&fit=crop',
+    preview_url: 'https://images.unsplash.com/photo-1492011221367-f47e3ccd77a0?w=1920&h=1080&fit=crop',
+    download_urls: {
+      mobile: 'https://images.unsplash.com/photo-1492011221367-f47e3ccd77a0?w=1080&h=1920&fit=crop',
+      desktop: 'https://images.unsplash.com/photo-1492011221367-f47e3ccd77a0?w=1920&h=1080&fit=crop',
+      desktop_4k: 'https://images.unsplash.com/photo-1492011221367-f47e3ccd77a0?w=3840&h=2160&fit=crop',
+    },
+    tags: ['inazuma', 'storm', 'thunder', 'scenery', 'dramatic'],
+    download_count: 5800,
+    view_count: 19800,
+    is_featured: false,
+    created_at: '2024-02-08',
+  },
+];
 
-  if (filters?.device && filters.device !== "all") {
-    result = result.filter(
-      (w) => w.device === filters.device || w.device === "both"
-    );
-  }
-
-  if (filters?.type && filters.type !== "all") {
-    result = result.filter((w) => w.type === filters.type);
-  }
-
-  if (filters?.search) {
-    const search = filters.search.toLowerCase();
-    result = result.filter(
-      (w) =>
-        w.title.toLowerCase().includes(search) ||
-        w.tags.some((t) => t.toLowerCase().includes(search))
-    );
-  }
-
-  return result;
+// 获取角色
+export function getCharacterById(id: string): Character | undefined {
+  return mockCharacters.find(c => c.id === id);
 }
 
-export function getMockFeaturedWallpapers(): Wallpaper[] {
-  return mockWallpapers.filter((w) => w.featured);
+// 获取壁纸的关联角色
+export function getWallpaperWithCharacters(wallpaper: Wallpaper): Wallpaper {
+  return {
+    ...wallpaper,
+    characters: wallpaper.character_ids
+      .map(id => getCharacterById(id))
+      .filter((c): c is Character => c !== undefined),
+  };
 }
 
-export function getMockWallpaperBySlug(slug: string): Wallpaper | undefined {
-  return mockWallpapers.find((w) => w.slug === slug);
+// 按元素筛选壁纸
+export function filterWallpapersByElement(element: Element): Wallpaper[] {
+  return mockWallpapers.filter(w => w.element === element);
 }
 
-export function getMockRelatedWallpapers(wallpaper: Wallpaper): Wallpaper[] {
-  return mockWallpapers
-    .filter(
-      (w) =>
-        w.id !== wallpaper.id &&
-        (w.device === wallpaper.device || w.device === "both") &&
-        w.type === wallpaper.type
-    )
-    .slice(0, 6);
+// 按地区筛选壁纸
+export function filterWallpapersByRegion(region: Region): Wallpaper[] {
+  return mockWallpapers.filter(w => w.region === region);
+}
+
+// 获取精选壁纸
+export function getFeaturedWallpapers(): Wallpaper[] {
+  return mockWallpapers.filter(w => w.is_featured);
+}
+
+// 获取热门壁纸
+export function getPopularWallpapers(limit: number = 10): Wallpaper[] {
+  return [...mockWallpapers]
+    .sort((a, b) => b.download_count - a.download_count)
+    .slice(0, limit);
+}
+
+// 获取最新壁纸
+export function getLatestWallpapers(limit: number = 10): Wallpaper[] {
+  return [...mockWallpapers]
+    .sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime())
+    .slice(0, limit);
 }

@@ -1,65 +1,86 @@
 {
   "common": {
-    "siteName": "高清壁纸",
+    "siteName": "GenshinWalls",
     "download": "下载",
     "close": "关闭",
     "search": "搜索",
-    "searchPlaceholder": "搜索壁纸...",
+    "searchPlaceholder": "搜索角色、壁纸...",
     "loading": "加载中...",
-    "noResults": "未找到壁纸",
+    "noResults": "未找到结果",
     "viewAll": "查看全部",
-    "backToHome": "返回首页"
+    "backToHome": "返回首页",
+    "all": "全部"
   },
   "nav": {
     "home": "首页",
-    "desktop": "桌面",
-    "mobile": "手机",
-    "static": "静态",
-    "dynamic": "动态"
+    "characters": "角色",
+    "regions": "地区",
+    "search": "搜索",
+    "elements": "元素"
   },
   "home": {
-    "title": "高清壁纸下载",
-    "subtitle": "为您的桌面和移动设备下载精美壁纸",
+    "badge": "高清原神壁纸",
+    "titlePart1": "发现精美的",
+    "titlePart2": "原神高清壁纸",
+    "subtitle": "海量4K高清壁纸，涵盖所有角色与场景。支持手机、桌面、超宽屏多种分辨率，免费下载。",
+    "browseCharacters": "浏览角色",
+    "downloadNow": "立即下载",
     "featured": "精选壁纸",
+    "popular": "热门壁纸",
     "latest": "最新壁纸",
-    "popular": "热门壁纸"
+    "byElement": "按元素浏览",
+    "byRegion": "按地区浏览"
   },
-  "filters": {
-    "all": "全部",
-    "device": "设备",
-    "type": "类型",
-    "desktop": "桌面",
-    "mobile": "手机",
-    "static": "静态",
-    "dynamic": "动态",
-    "resolution": "分辨率"
+  "characters": {
+    "title": "全部角色",
+    "subtitle": "选择角色浏览对应壁纸",
+    "filterByElement": "按元素筛选",
+    "filterByRegion": "按地区筛选",
+    "filterByRarity": "按稀有度筛选",
+    "wallpaperCount": "{count} 张壁纸"
   },
   "wallpaper": {
     "downloadOptions": "下载选项",
     "resolution": "分辨率",
-    "type": "类型",
-    "device": "设备",
+    "mobile": "手机 (1080×1920)",
+    "desktop": "桌面 (1920×1080)",
+    "desktop2k": "2K (2560×1440)",
+    "desktop4k": "4K (3840×2160)",
+    "ultrawide": "超宽屏 (3440×1440)",
+    "source": "来源",
+    "official": "官方",
+    "fanart": "同人",
+    "ai": "AI生成",
+    "screenshot": "游戏截图",
+    "artist": "画师",
     "tags": "标签",
     "relatedWallpapers": "相关壁纸",
-    "notFound": "壁纸未找到",
-    "notFoundDesc": "您查找的壁纸不存在或已被删除。"
+    "downloadCount": "下载次数",
+    "viewCount": "浏览次数"
+  },
+  "regions": {
+    "title": "探索提瓦特",
+    "subtitle": "按地区浏览原神壁纸",
+    "mondstadt": "蒙德",
+    "liyue": "璃月",
+    "inazuma": "稻妻",
+    "sumeru": "须弥",
+    "fontaine": "枫丹",
+    "natlan": "纳塔"
   },
   "footer": {
-    "description": "您的高清壁纸来源",
+    "description": "高质量原神壁纸下载站，提供4K高清壁纸，支持手机和桌面。",
+    "disclaimer": "本站为非官方粉丝站点，与miHoYo/HoYoverse无关。",
+    "elements": "元素",
+    "regions": "地区",
     "links": "快速链接",
-    "legal": "法律信息",
-    "privacy": "隐私政策",
-    "terms": "服务条款",
-    "contact": "联系我们",
-    "copyright": "版权所有"
+    "copyright": "保留所有权利"
   },
   "meta": {
-    "homeTitle": "高清桌面和手机壁纸下载",
-    "homeDesc": "下载精美的高清壁纸，支持桌面和移动设备。浏览数千张4K、2K、全高清静态和动态壁纸。",
-    "desktopTitle": "桌面壁纸",
-    "desktopDesc": "浏览和下载高清桌面壁纸，支持4K、2K、全高清分辨率。",
-    "mobileTitle": "手机壁纸",
-    "mobileDesc": "浏览和下载精美手机壁纸，支持 iPhone 和 Android 设备。",
+    "homeTitle": "GenshinWalls - 原神高清壁纸下载",
+    "homeDesc": "免费下载高清原神壁纸，涵盖所有角色和场景。支持4K、2K、手机、桌面多种分辨率。",
+    "charactersTitle": "原神角色壁纸",
+    "charactersDesc": "浏览所有原神角色壁纸，按元素、地区、稀有度筛选。",
     "searchTitle": "搜索壁纸"
   }
 }

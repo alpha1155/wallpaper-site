@@ -29,13 +29,13 @@ export default async function LocaleLayout({ children, params }: Props) {
   const isRtl = isRtlLocale(locale as Locale);
 
   return (
-    <html lang={locale} dir={isRtl ? 'rtl' : 'ltr'} suppressHydrationWarning>
-      <body className="font-sans antialiased min-h-screen flex flex-col">
+    <html lang={locale} dir={isRtl ? 'rtl' : 'ltr'} suppressHydrationWarning className="dark">
+      <body className="font-sans antialiased min-h-screen flex flex-col bg-surface-950">
         <NextIntlClientProvider messages={messages}>
           <ThemeProvider
             attribute="class"
-            defaultTheme="system"
-            enableSystem
+            defaultTheme="dark"
+            enableSystem={false}
             disableTransitionOnChange
           >
             <Header />

@@ -1,65 +1,86 @@
 {
   "common": {
-    "siteName": "WallpaperHD",
+    "siteName": "GenshinWalls",
     "download": "Download",
     "close": "Close",
     "search": "Search",
-    "searchPlaceholder": "Search wallpapers...",
+    "searchPlaceholder": "Search characters, wallpapers...",
     "loading": "Loading...",
-    "noResults": "No wallpapers found",
+    "noResults": "No results found",
     "viewAll": "View All",
-    "backToHome": "Back to Home"
+    "backToHome": "Back to Home",
+    "all": "All"
   },
   "nav": {
     "home": "Home",
-    "desktop": "Desktop",
-    "mobile": "Mobile",
-    "static": "Static",
-    "dynamic": "Dynamic"
+    "characters": "Characters",
+    "regions": "Regions",
+    "search": "Search",
+    "elements": "Elements"
   },
   "home": {
-    "title": "High Quality Wallpapers",
-    "subtitle": "Download stunning wallpapers for your desktop and mobile devices",
+    "badge": "HD Genshin Wallpapers",
+    "titlePart1": "Discover Beautiful",
+    "titlePart2": "Genshin Impact Wallpapers",
+    "subtitle": "Download stunning 4K wallpapers featuring all characters and scenes. Available in multiple resolutions for mobile, desktop, and ultrawide displays.",
+    "browseCharacters": "Browse Characters",
+    "downloadNow": "Download Now",
     "featured": "Featured Wallpapers",
+    "popular": "Popular Wallpapers",
     "latest": "Latest Wallpapers",
-    "popular": "Popular Wallpapers"
+    "byElement": "Browse by Element",
+    "byRegion": "Browse by Region"
   },
-  "filters": {
-    "all": "All",
-    "device": "Device",
-    "type": "Type",
-    "desktop": "Desktop",
-    "mobile": "Mobile",
-    "static": "Static",
-    "dynamic": "Dynamic",
-    "resolution": "Resolution"
+  "characters": {
+    "title": "All Characters",
+    "subtitle": "Select a character to browse their wallpapers",
+    "filterByElement": "Filter by Element",
+    "filterByRegion": "Filter by Region",
+    "filterByRarity": "Filter by Rarity",
+    "wallpaperCount": "{count} wallpapers"
   },
   "wallpaper": {
     "downloadOptions": "Download Options",
     "resolution": "Resolution",
-    "type": "Type",
-    "device": "Device",
+    "mobile": "Mobile (1080×1920)",
+    "desktop": "Desktop (1920×1080)",
+    "desktop2k": "2K (2560×1440)",
+    "desktop4k": "4K (3840×2160)",
+    "ultrawide": "Ultrawide (3440×1440)",
+    "source": "Source",
+    "official": "Official",
+    "fanart": "Fan Art",
+    "ai": "AI Generated",
+    "screenshot": "Screenshot",
+    "artist": "Artist",
     "tags": "Tags",
     "relatedWallpapers": "Related Wallpapers",
-    "notFound": "Wallpaper not found",
-    "notFoundDesc": "The wallpaper you're looking for doesn't exist or has been removed."
+    "downloadCount": "Downloads",
+    "viewCount": "Views"
+  },
+  "regions": {
+    "title": "Explore Teyvat",
+    "subtitle": "Browse Genshin wallpapers by region",
+    "mondstadt": "Mondstadt",
+    "liyue": "Liyue",
+    "inazuma": "Inazuma",
+    "sumeru": "Sumeru",
+    "fontaine": "Fontaine",
+    "natlan": "Natlan"
   },
   "footer": {
-    "description": "Your source for high-quality wallpapers",
+    "description": "High-quality Genshin Impact wallpaper downloads. 4K HD wallpapers for mobile and desktop.",
+    "disclaimer": "This is an unofficial fan site, not affiliated with miHoYo/HoYoverse.",
+    "elements": "Elements",
+    "regions": "Regions",
     "links": "Quick Links",
-    "legal": "Legal",
-    "privacy": "Privacy Policy",
-    "terms": "Terms of Service",
-    "contact": "Contact",
     "copyright": "All rights reserved"
   },
   "meta": {
-    "homeTitle": "High Quality Wallpapers for Desktop & Mobile",
-    "homeDesc": "Download stunning high-quality wallpapers for desktop and mobile devices. Browse thousands of static and dynamic wallpapers in 4K, QHD, and Full HD resolutions.",
-    "desktopTitle": "Desktop Wallpapers",
-    "desktopDesc": "Browse and download high-quality desktop wallpapers in 4K, QHD, and Full HD resolutions.",
-    "mobileTitle": "Mobile Wallpapers",
-    "mobileDesc": "Browse and download beautiful mobile wallpapers for iPhone and Android devices.",
+    "homeTitle": "GenshinWalls - Genshin Impact HD Wallpapers",
+    "homeDesc": "Free high-quality Genshin Impact wallpapers. All characters and scenes in 4K, 2K, mobile, and desktop resolutions.",
+    "charactersTitle": "Genshin Impact Character Wallpapers",
+    "charactersDesc": "Browse all Genshin Impact character wallpapers. Filter by element, region, and rarity.",
     "searchTitle": "Search Wallpapers"
   }
 }

@@ -2,6 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
 @layer base {
   :root {
     --background: #ffffff;
@@ -9,8 +11,8 @@
   }
 
   .dark {
-    --background: #09090b;
-    --foreground: #fafafa;
+    --background: #0D0D12;
+    --foreground: #F5F5F7;
   }
 }
 
@@ -20,7 +22,7 @@
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-sans;
     font-feature-settings: "rlig" 1, "calt" 1;
   }
 }
@@ -35,7 +37,7 @@
   }
 
   .btn-primary {
-    @apply btn bg-primary-500 text-white hover:bg-primary-600 focus:ring-primary-500;
+    @apply btn bg-genshin-gold text-surface-950 hover:bg-genshin-gold-light focus:ring-genshin-gold;
   }
 
   .btn-secondary {
@@ -50,8 +52,54 @@
     @apply bg-white dark:bg-surface-900 rounded-xl border border-surface-200 dark:border-surface-800 shadow-sm;
   }
 
+  .card-genshin {
+    @apply bg-white dark:bg-surface-900/80 rounded-xl border border-genshin-gold/20 shadow-lg backdrop-blur-sm;
+  }
+
   .skeleton {
     @apply bg-surface-200 dark:bg-surface-800 animate-pulse rounded;
+  }
+
+  /* Element badges */
+  .element-badge {
+    @apply inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium;
+  }
+
+  .element-pyro {
+    @apply bg-element-pyro/20 text-element-pyro;
+  }
+
+  .element-hydro {
+    @apply bg-element-hydro/20 text-element-hydro;
+  }
+
+  .element-anemo {
+    @apply bg-element-anemo/20 text-element-anemo;
+  }
+
+  .element-electro {
+    @apply bg-element-electro/20 text-element-electro;
+  }
+
+  .element-dendro {
+    @apply bg-element-dendro/20 text-element-dendro;
+  }
+
+  .element-cryo {
+    @apply bg-element-cryo/20 text-element-cryo;
+  }
+
+  .element-geo {
+    @apply bg-element-geo/20 text-element-geo;
+  }
+
+  /* Glow effects */
+  .glow-gold {
+    box-shadow: 0 0 20px rgba(212, 168, 83, 0.3);
+  }
+
+  .glow-gold:hover {
+    box-shadow: 0 0 30px rgba(212, 168, 83, 0.5);
   }
 }
 
@@ -95,5 +143,19 @@
 
   .scrollbar-hide::-webkit-scrollbar {
     display: none;
+  }
+
+  /* Gradient text */
+  .text-gradient-gold {
+    @apply bg-gradient-to-r from-genshin-gold via-genshin-gold-light to-genshin-gold bg-clip-text text-transparent;
+  }
+
+  /* Star rarity colors */
+  .rarity-5 {
+    @apply text-genshin-gold;
+  }
+
+  .rarity-4 {
+    @apply text-purple-400;
   }
 }
