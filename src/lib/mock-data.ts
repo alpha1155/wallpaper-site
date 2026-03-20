@@ -1,4 +1,4 @@
-import { Character, Wallpaper, Element, Region, WeaponType } from '@/types/genshin';
+import { Character, Wallpaper, Element, Region } from '@/types/genshin';
 
 // 示例角色数据
 export const mockCharacters: Character[] = [

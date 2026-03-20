@@ -1,3 +1,5 @@
+import type { Character, Wallpaper } from "@/types/genshin";
+
 export type Json =
   | string
   | number
@@ -9,62 +11,49 @@ export type Json =
 export interface Database {
   public: {
     Tables: {
+      characters: {
+        Row: Character;
+        Insert: Omit<Character, "created_at">;
+        Update: Partial<Omit<Character, "id">>;
+      };
       wallpapers: {
+        Row: Wallpaper;
+        Insert: Omit<Wallpaper, "id" | "created_at" | "download_count" | "view_count">;
+        Update: Partial<Omit<Wallpaper, "id">>;
+      };
+      download_logs: {
         Row: {
           id: string;
-          title: string;
-          slug: string;
-          type: "static" | "dynamic";
-          device: "mobile" | "desktop" | "both";
-          thumbnail_url: string;
-          preview_url: string;
-          download_urls: Json;
-          tags: string[];
-          featured: boolean;
-          views: number;
-          downloads: number;
+          wallpaper_id: string;
+          resolution: string;
+          user_agent: string | null;
+          ip_hash: string | null;
           created_at: string;
-          updated_at: string;
         };
-        Insert: {
-          id?: string;
-          title: string;
-          slug: string;
-          type: "static" | "dynamic";
-          device: "mobile" | "desktop" | "both";
-          thumbnail_url: string;
-          preview_url: string;
-          download_urls: Json;
-          tags?: string[];
-          featured?: boolean;
-          views?: number;
-          downloads?: number;
-          created_at?: string;
-          updated_at?: string;
-        };
-        Update: {
-          id?: string;
-          title?: string;
-          slug?: string;
-          type?: "static" | "dynamic";
-          device?: "mobile" | "desktop" | "both";
-          thumbnail_url?: string;
-          preview_url?: string;
-          download_urls?: Json;
-          tags?: string[];
-          featured?: boolean;
-          views?: number;
-          downloads?: number;
-          created_at?: string;
-          updated_at?: string;
-        };
+        Insert: Omit<Database["public"]["Tables"]["download_logs"]["Row"], "id" | "created_at">;
+        Update: Partial<Database["public"]["Tables"]["download_logs"]["Row"]>;
       };
     };
-    Views: Record<string, never>;
-    Functions: Record<string, never>;
-    Enums: {
-      wallpaper_type: "static" | "dynamic";
-      device_type: "mobile" | "desktop" | "both";
+    Views: {
+      popular_wallpapers: {
+        Row: Wallpaper;
+      };
+      latest_wallpapers: {
+        Row: Wallpaper;
+      };
+      featured_wallpapers: {
+        Row: Wallpaper;
+      };
+    };
+    Functions: {
+      increment_download_count: {
+        Args: { wallpaper_uuid: string };
+        Returns: void;
+      };
+      increment_view_count: {
+        Args: { wallpaper_uuid: string };
+        Returns: void;
+      };
     };
   };
 }

@@ -4,7 +4,6 @@ import Image from 'next/image';
 import { Link } from '@/i18n/routing';
 import { Download, Eye } from 'lucide-react';
 import { Wallpaper, ELEMENTS } from '@/types/genshin';
-import { cn } from '@/lib/utils';
 
 interface WallpaperCardProps {
   wallpaper: Wallpaper;

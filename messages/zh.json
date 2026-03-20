@@ -29,7 +29,8 @@
     "popular": "热门壁纸",
     "latest": "最新壁纸",
     "byElement": "按元素浏览",
-    "byRegion": "按地区浏览"
+    "byRegion": "按地区浏览",
+    "viewAll": "查看全部"
   },
   "characters": {
     "title": "全部角色",

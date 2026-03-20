@@ -1,65 +1,87 @@
 {
   "common": {
-    "siteName": "壁紙HD",
+    "siteName": "GenshinWalls",
     "download": "ダウンロード",
     "close": "閉じる",
     "search": "検索",
-    "searchPlaceholder": "壁紙を検索...",
+    "searchPlaceholder": "キャラクター、壁紙を検索...",
     "loading": "読み込み中...",
-    "noResults": "壁紙が見つかりません",
+    "noResults": "結果が見つかりません",
     "viewAll": "すべて見る",
-    "backToHome": "ホームに戻る"
+    "backToHome": "ホームに戻る",
+    "all": "すべて"
   },
   "nav": {
     "home": "ホーム",
-    "desktop": "デスクトップ",
-    "mobile": "モバイル",
-    "static": "静止画",
-    "dynamic": "動画"
+    "characters": "キャラクター",
+    "regions": "地域",
+    "search": "検索",
+    "elements": "元素"
   },
   "home": {
-    "title": "高画質壁紙",
-    "subtitle": "デスクトップとモバイルデバイス用の美しい壁紙をダウンロード",
+    "badge": "高画質原神壁紙",
+    "titlePart1": "美しい",
+    "titlePart2": "原神壁紙を発見",
+    "subtitle": "すべてのキャラクターとシーンを含む4K高画質壁紙をダウンロード。モバイル、デスクトップ、ウルトラワイド対応。",
+    "browseCharacters": "キャラクターを見る",
+    "downloadNow": "今すぐダウンロード",
     "featured": "おすすめの壁紙",
+    "popular": "人気の壁紙",
     "latest": "最新の壁紙",
-    "popular": "人気の壁紙"
+    "byElement": "元素で探す",
+    "byRegion": "地域で探す",
+    "viewAll": "すべて見る"
   },
-  "filters": {
-    "all": "すべて",
-    "device": "デバイス",
-    "type": "タイプ",
-    "desktop": "デスクトップ",
-    "mobile": "モバイル",
-    "static": "静止画",
-    "dynamic": "動画",
-    "resolution": "解像度"
+  "characters": {
+    "title": "全キャラクター",
+    "subtitle": "キャラクターを選択して壁紙を見る",
+    "filterByElement": "元素でフィルター",
+    "filterByRegion": "地域でフィルター",
+    "filterByRarity": "レアリティでフィルター",
+    "wallpaperCount": "{count} 枚の壁紙"
   },
   "wallpaper": {
     "downloadOptions": "ダウンロードオプション",
     "resolution": "解像度",
-    "type": "タイプ",
-    "device": "デバイス",
+    "mobile": "モバイル (1080×1920)",
+    "desktop": "デスクトップ (1920×1080)",
+    "desktop2k": "2K (2560×1440)",
+    "desktop4k": "4K (3840×2160)",
+    "ultrawide": "ウルトラワイド (3440×1440)",
+    "source": "ソース",
+    "official": "公式",
+    "fanart": "ファンアート",
+    "ai": "AI生成",
+    "screenshot": "スクリーンショット",
+    "artist": "アーティスト",
     "tags": "タグ",
     "relatedWallpapers": "関連する壁紙",
-    "notFound": "壁紙が見つかりません",
-    "notFoundDesc": "お探しの壁紙は存在しないか、削除されました。"
+    "downloadCount": "ダウンロード数",
+    "viewCount": "閲覧数"
+  },
+  "regions": {
+    "title": "テイワットを探索",
+    "subtitle": "地域で原神壁紙を探す",
+    "mondstadt": "モンド",
+    "liyue": "璃月",
+    "inazuma": "稲妻",
+    "sumeru": "スメール",
+    "fontaine": "フォンテーヌ",
+    "natlan": "ナタ"
   },
   "footer": {
-    "description": "高品質な壁紙のソース",
+    "description": "高品質な原神壁紙ダウンロードサイト。4K HD壁紙をモバイルとデスクトップ向けに提供。",
+    "disclaimer": "これは非公式ファンサイトです。miHoYo/HoYoverseとは関係ありません。",
+    "elements": "元素",
+    "regions": "地域",
     "links": "クイックリンク",
-    "legal": "法的情報",
-    "privacy": "プライバシーポリシー",
-    "terms": "利用規約",
-    "contact": "お問い合わせ",
     "copyright": "全著作権所有"
   },
   "meta": {
-    "homeTitle": "デスクトップ＆モバイル用高画質壁紙",
-    "homeDesc": "デスクトップとモバイルデバイス用の美しい高画質壁紙をダウンロード。4K、QHD、フルHD解像度の静止画と動画壁紙を多数掲載。",
-    "desktopTitle": "デスクトップ壁紙",
-    "desktopDesc": "4K、QHD、フルHD解像度の高画質デスクトップ壁紙をブラウズしてダウンロード。",
-    "mobileTitle": "モバイル壁紙",
-    "mobileDesc": "iPhoneとAndroidデバイス用の美しいモバイル壁紙をブラウズしてダウンロード。",
+    "homeTitle": "GenshinWalls - 原神高画質壁紙",
+    "homeDesc": "原神の高品質壁紙を無料ダウンロード。全キャラクターとシーンを4K、2K、モバイル、デスクトップ解像度で。",
+    "charactersTitle": "原神キャラクター壁紙",
+    "charactersDesc": "すべての原神キャラクター壁紙を見る。元素、地域、レアリティでフィルター。",
     "searchTitle": "壁紙を検索"
   }
 }

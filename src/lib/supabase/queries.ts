@@ -1,60 +1,68 @@
 import { supabase } from "./client";
-import type { Wallpaper, WallpaperFilters, PaginatedResponse } from "@/types/wallpaper";
+import type { Wallpaper, Character, Element, Region } from "@/types/genshin";
+
+export interface WallpaperFilters {
+  element?: Element;
+  region?: Region;
+  characterId?: string;
+  source?: string;
+  search?: string;
+}
+
+export interface PaginatedResponse<T> {
+  data: T[];
+  count: number;
+  page: number;
+  pageSize: number;
+}
 
 export async function getWallpapers(
   filters: WallpaperFilters = {},
-  page = 1,
-  limit = 20
+  page: number = 1,
+  pageSize: number = 20
 ): Promise<PaginatedResponse<Wallpaper>> {
   let query = supabase
     .from("wallpapers")
     .select("*", { count: "exact" });
 
-  if (filters.device && filters.device !== "all") {
-    query = query.or(`device.eq.${filters.device},device.eq.both`);
+  if (filters.element) {
+    query = query.eq("element", filters.element);
   }
 
-  if (filters.type && filters.type !== "all") {
-    query = query.eq("type", filters.type);
+  if (filters.region) {
+    query = query.eq("region", filters.region);
+  }
+
+  if (filters.characterId) {
+    query = query.contains("character_ids", [filters.characterId]);
+  }
+
+  if (filters.source) {
+    query = query.eq("source", filters.source);
   }
 
   if (filters.search) {
     query = query.ilike("title", `%${filters.search}%`);
   }
 
-  if (filters.tags && filters.tags.length > 0) {
-    query = query.contains("tags", filters.tags);
-  }
-
-  const from = (page - 1) * limit;
-  const to = from + limit - 1;
+  const from = (page - 1) * pageSize;
+  const to = from + pageSize - 1;
 
   const { data, error, count } = await query
     .order("created_at", { ascending: false })
     .range(from, to);
 
-  if (error) throw error;
+  if (error) {
+    console.error("Error fetching wallpapers:", error);
+    return { data: [], count: 0, page, pageSize };
+  }
 
   return {
-    data: (data as unknown as Wallpaper[]) || [],
-    total: count || 0,
+    data: (data as Wallpaper[]) || [],
+    count: count || 0,
     page,
-    limit,
-    hasMore: count ? from + limit < count : false,
+    pageSize,
   };
-}
-
-export async function getFeaturedWallpapers(limit = 10): Promise<Wallpaper[]> {
-  const { data, error } = await supabase
-    .from("wallpapers")
-    .select("*")
-    .eq("featured", true)
-    .order("created_at", { ascending: false })
-    .limit(limit);
-
-  if (error) throw error;
-
-  return (data as unknown as Wallpaper[]) || [];
 }
 
 export async function getWallpaperBySlug(slug: string): Promise<Wallpaper | null> {
@@ -65,71 +73,69 @@ export async function getWallpaperBySlug(slug: string): Promise<Wallpaper | null
     .single();
 
   if (error) {
-    if (error.code === "PGRST116") return null;
-    throw error;
+    console.error("Error fetching wallpaper:", error);
+    return null;
   }
 
-  return data as unknown as Wallpaper;
+  return data as Wallpaper;
 }
 
-export async function getWallpapersByDevice(
-  device: "mobile" | "desktop",
-  page = 1,
-  limit = 20
-): Promise<PaginatedResponse<Wallpaper>> {
-  return getWallpapers({ device }, page, limit);
-}
-
-export async function getRelatedWallpapers(
-  wallpaper: Wallpaper,
-  limit = 6
-): Promise<Wallpaper[]> {
+export async function getFeaturedWallpapers(limit: number = 10): Promise<Wallpaper[]> {
   const { data, error } = await supabase
     .from("wallpapers")
     .select("*")
-    .neq("id", wallpaper.id)
-    .or(`device.eq.${wallpaper.device},device.eq.both`)
-    .eq("type", wallpaper.type)
+    .eq("is_featured", true)
+    .order("created_at", { ascending: false })
     .limit(limit);
 
-  if (error) throw error;
+  if (error) {
+    console.error("Error fetching featured wallpapers:", error);
+    return [];
+  }
 
-  return (data as unknown as Wallpaper[]) || [];
+  return (data as Wallpaper[]) || [];
 }
 
-export async function incrementViews(id: string): Promise<void> {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  await (supabase.rpc as any)("increment_views", { wallpaper_id: id });
-}
-
-export async function incrementDownloads(id: string): Promise<void> {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  await (supabase.rpc as any)("increment_downloads", { wallpaper_id: id });
-}
-
-export async function getAllTags(): Promise<string[]> {
+export async function getPopularWallpapers(limit: number = 10): Promise<Wallpaper[]> {
   const { data, error } = await supabase
     .from("wallpapers")
-    .select("tags");
+    .select("*")
+    .order("download_count", { ascending: false })
+    .limit(limit);
 
-  if (error) throw error;
+  if (error) {
+    console.error("Error fetching popular wallpapers:", error);
+    return [];
+  }
 
-  const allTags = new Set<string>();
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  (data as any[])?.forEach((row) => {
-    (row.tags as string[])?.forEach((tag: string) => allTags.add(tag));
-  });
-
-  return Array.from(allTags).sort();
+  return (data as Wallpaper[]) || [];
 }
 
-export async function getAllSlugs(): Promise<string[]> {
+export async function getCharacters(): Promise<Character[]> {
   const { data, error } = await supabase
-    .from("wallpapers")
-    .select("slug");
+    .from("characters")
+    .select("*")
+    .order("rarity", { ascending: false });
 
-  if (error) throw error;
+  if (error) {
+    console.error("Error fetching characters:", error);
+    return [];
+  }
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  return (data as any[])?.map((row) => row.slug) || [];
+  return (data as Character[]) || [];
+}
+
+export async function getCharacterById(id: string): Promise<Character | null> {
+  const { data, error } = await supabase
+    .from("characters")
+    .select("*")
+    .eq("id", id)
+    .single();
+
+  if (error) {
+    console.error("Error fetching character:", error);
+    return null;
+  }
+
+  return data as Character;
 }
