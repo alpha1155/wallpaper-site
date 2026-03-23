@@ -4,5 +4,10 @@ import { routing } from './i18n/routing';
 export default createMiddleware(routing);
 
 export const config = {
-  matcher: ['/', '/(zh|ja|en)/:path*'],
+  matcher: [
+    // Match all pathnames except:
+    // - API routes (/api/*)
+    // - Static files (/_next/*, /favicon.ico, etc.)
+    '/((?!api|_next|_vercel|.*\\..*).*)',
+  ],
 };
