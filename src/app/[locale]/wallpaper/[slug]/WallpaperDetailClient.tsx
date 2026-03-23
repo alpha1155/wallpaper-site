@@ -4,35 +4,51 @@ import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 import { Link } from '@/i18n/routing';
 import { Download, Eye, ArrowLeft, ExternalLink } from 'lucide-react';
-import { Wallpaper, ELEMENTS, REGIONS } from '@/types/genshin';
-import { WallpaperGrid } from '@/components/genshin/WallpaperGrid';
-import { mockWallpapers } from '@/lib/mock-data';
+import { ELEMENTS, REGIONS } from '@/types/genshin';
+
+interface WallpaperData {
+  id: string;
+  title: string;
+  slug: string;
+  preview_url: string;
+  thumbnail_url: string;
+  download_urls: {
+    mobile?: string;
+    desktop?: string;
+    desktop_2k?: string;
+    desktop_4k?: string;
+    ultrawide?: string;
+  };
+  element?: string;
+  region?: string;
+  character_ids: string[];
+  tags: string[];
+  source: string;
+  artist_name?: string;
+  artist_url?: string;
+  view_count: number;
+  download_count: number;
+}
 
 interface Props {
-  wallpaper: Wallpaper;
+  wallpaper: WallpaperData;
 }
 
 export function WallpaperDetailClient({ wallpaper }: Props) {
   const t = useTranslations('wallpaper');
-  const elementInfo = wallpaper.element ? ELEMENTS[wallpaper.element] : null;
-  const regionInfo = wallpaper.region ? REGIONS[wallpaper.region] : null;
+  
+  // Safe access to element and region info
+  const elementKey = wallpaper.element as keyof typeof ELEMENTS | undefined;
+  const regionKey = wallpaper.region as keyof typeof REGIONS | undefined;
+  const elementInfo = elementKey ? ELEMENTS[elementKey] : null;
+  const regionInfo = regionKey ? REGIONS[regionKey] : null;
 
-  // Get related wallpapers
-  const relatedWallpapers = mockWallpapers
-    .filter(
-      (w) =>
-        w.id !== wallpaper.id &&
-        (w.element === wallpaper.element ||
-          w.region === wallpaper.region ||
-          w.character_ids.some((id) => wallpaper.character_ids.includes(id)))
-    )
-    .slice(0, 5);
-
-  const formatCount = (count: number) => {
-    if (count >= 1000) {
-      return `${(count / 1000).toFixed(1)}k`;
+  const formatCount = (count: number | null | undefined) => {
+    const num = count || 0;
+    if (num >= 1000) {
+      return `${(num / 1000).toFixed(1)}k`;
     }
-    return count.toString();
+    return num.toString();
   };
 
   const sourceLabels: Record<string, string> = {
@@ -42,13 +58,18 @@ export function WallpaperDetailClient({ wallpaper }: Props) {
     screenshot: t('screenshot'),
   };
 
+  // Safe access to download_urls
+  const downloadUrls = wallpaper.download_urls || {};
   const downloadOptions = [
-    { key: 'mobile', label: t('mobile'), url: wallpaper.download_urls.mobile },
-    { key: 'desktop', label: t('desktop'), url: wallpaper.download_urls.desktop },
-    { key: 'desktop_2k', label: t('desktop2k'), url: wallpaper.download_urls.desktop_2k },
-    { key: 'desktop_4k', label: t('desktop4k'), url: wallpaper.download_urls.desktop_4k },
-    { key: 'ultrawide', label: t('ultrawide'), url: wallpaper.download_urls.ultrawide },
+    { key: 'mobile', label: t('mobile'), url: downloadUrls.mobile },
+    { key: 'desktop', label: t('desktop'), url: downloadUrls.desktop },
+    { key: 'desktop_2k', label: t('desktop2k'), url: downloadUrls.desktop_2k },
+    { key: 'desktop_4k', label: t('desktop4k'), url: downloadUrls.desktop_4k },
+    { key: 'ultrawide', label: t('ultrawide'), url: downloadUrls.ultrawide },
   ].filter((opt) => opt.url);
+
+  // Safe access to tags
+  const tags = wallpaper.tags || [];
 
   return (
     <div className="min-h-screen bg-surface-950">
@@ -112,7 +133,7 @@ export function WallpaperDetailClient({ wallpaper }: Props) {
                 </div>
               )}
               <div className="text-surface-400 text-sm">
-                {t('source')}: {sourceLabels[wallpaper.source]}
+                {t('source')}: {sourceLabels[wallpaper.source] || wallpaper.source}
               </div>
               {wallpaper.artist_name && (
                 <div className="text-surface-400 text-sm flex items-center gap-2">
@@ -135,11 +156,11 @@ export function WallpaperDetailClient({ wallpaper }: Props) {
             </div>
 
             {/* Tags */}
-            {wallpaper.tags.length > 0 && (
+            {tags.length > 0 && (
               <div>
                 <h3 className="text-surface-300 text-sm mb-2">{t('tags')}</h3>
                 <div className="flex flex-wrap gap-2">
-                  {wallpaper.tags.map((tag) => (
+                  {tags.map((tag) => (
                     <span
                       key={tag}
                       className="px-2 py-1 bg-surface-800 text-surface-300 text-xs rounded-full"
@@ -155,33 +176,27 @@ export function WallpaperDetailClient({ wallpaper }: Props) {
             <div>
               <h3 className="text-surface-300 text-sm mb-3">{t('downloadOptions')}</h3>
               <div className="space-y-2">
-                {downloadOptions.map((opt) => (
-                  <a
-                    key={opt.key}
-                    href={opt.url}
-                    download
-                    className="flex items-center justify-between w-full px-4 py-3 bg-surface-900 hover:bg-surface-800 border border-surface-700 hover:border-genshin-gold/30 rounded-lg transition-all group"
-                  >
-                    <span className="text-surface-300 group-hover:text-white">
-                      {opt.label}
-                    </span>
-                    <Download className="w-4 h-4 text-surface-500 group-hover:text-genshin-gold" />
-                  </a>
-                ))}
+                {downloadOptions.length > 0 ? (
+                  downloadOptions.map((opt) => (
+                    <a
+                      key={opt.key}
+                      href={opt.url}
+                      download
+                      className="flex items-center justify-between w-full px-4 py-3 bg-surface-900 hover:bg-surface-800 border border-surface-700 hover:border-genshin-gold/30 rounded-lg transition-all group"
+                    >
+                      <span className="text-surface-300 group-hover:text-white">
+                        {opt.label}
+                      </span>
+                      <Download className="w-4 h-4 text-surface-500 group-hover:text-genshin-gold" />
+                    </a>
+                  ))
+                ) : (
+                  <p className="text-surface-500 text-sm">暂无下载选项</p>
+                )}
               </div>
             </div>
           </div>
         </div>
-
-        {/* Related Wallpapers */}
-        {relatedWallpapers.length > 0 && (
-          <section className="mt-16">
-            <h2 className="text-xl font-bold text-white mb-6">
-              {t('relatedWallpapers')}
-            </h2>
-            <WallpaperGrid wallpapers={relatedWallpapers} columns={5} />
-          </section>
-        )}
       </div>
     </div>
   );
