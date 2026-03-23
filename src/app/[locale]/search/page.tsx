@@ -1,37 +1,60 @@
 'use client';
 
-import { useState, useMemo } from 'react';
+import { useState, useEffect } from 'react';
 import { useTranslations } from 'next-intl';
 import { Search } from 'lucide-react';
 import { WallpaperGrid } from '@/components/genshin/WallpaperGrid';
 import { ElementFilter } from '@/components/genshin/ElementFilter';
-import { mockWallpapers } from '@/lib/mock-data';
-import { Element } from '@/types/genshin';
+import { createClient } from '@supabase/supabase-js';
+import { Element, Wallpaper } from '@/types/genshin';
 
 export default function SearchPage() {
   const t = useTranslations();
   const [query, setQuery] = useState('');
   const [selectedElement, setSelectedElement] = useState<Element | null>(null);
+  const [wallpapers, setWallpapers] = useState<Wallpaper[]>([]);
+  const [loading, setLoading] = useState(false);
 
-  const filteredWallpapers = useMemo(() => {
-    let results = mockWallpapers;
+  useEffect(() => {
+    async function fetchWallpapers() {
+      setLoading(true);
 
-    // Filter by element
-    if (selectedElement) {
-      results = results.filter(w => w.element === selectedElement);
+      const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+      const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+      
+      if (!supabaseUrl || !supabaseKey) {
+        setLoading(false);
+        return;
+      }
+
+      const supabase = createClient(supabaseUrl, supabaseKey);
+
+      let dbQuery = supabase
+        .from('wallpapers')
+        .select('*')
+        .order('created_at', { ascending: false });
+
+      if (selectedElement) {
+        dbQuery = dbQuery.eq('element', selectedElement);
+      }
+
+      if (query) {
+        dbQuery = dbQuery.ilike('title', `%${query}%`);
+      }
+
+      const { data, error } = await dbQuery;
+
+      if (error) {
+        console.error('Error searching:', error);
+        setWallpapers([]);
+      } else {
+        setWallpapers(data as Wallpaper[]);
+      }
+
+      setLoading(false);
     }
 
-    // Filter by search query
-    if (query) {
-      const lowerQuery = query.toLowerCase();
-      results = results.filter(
-        w =>
-          w.title.toLowerCase().includes(lowerQuery) ||
-          w.tags.some(tag => tag.toLowerCase().includes(lowerQuery))
-      );
-    }
-
-    return results;
+    fetchWallpapers();
   }, [query, selectedElement]);
 
   return (
@@ -65,12 +88,18 @@ export default function SearchPage() {
         </div>
 
         {/* Results */}
-        {filteredWallpapers.length > 0 ? (
+        {loading ? (
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
+            {Array.from({ length: 10 }).map((_, i) => (
+              <div key={i} className="aspect-[3/4] bg-surface-800 rounded-xl animate-pulse" />
+            ))}
+          </div>
+        ) : wallpapers.length > 0 ? (
           <>
             <p className="text-surface-400 mb-6">
-              找到 {filteredWallpapers.length} 张壁纸
+              找到 {wallpapers.length} 张壁纸
             </p>
-            <WallpaperGrid wallpapers={filteredWallpapers} />
+            <WallpaperGrid wallpapers={wallpapers} />
           </>
         ) : (
           <div className="text-center py-12">

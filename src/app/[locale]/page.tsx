@@ -4,19 +4,56 @@ import { useTranslations } from 'next-intl';
 import { Link } from '@/i18n/routing';
 import { Sparkles } from 'lucide-react';
 import { WallpaperGrid } from '@/components/genshin/WallpaperGrid';
-import { mockWallpapers } from '@/lib/mock-data';
-import { ELEMENTS, Element } from '@/types/genshin';
-import { useState } from 'react';
+import { ELEMENTS, Element, Wallpaper } from '@/types/genshin';
+import { useState, useEffect } from 'react';
+import { createClient } from '@supabase/supabase-js';
 
 export default function HomePage() {
   const t = useTranslations('home');
   const [selectedElement, setSelectedElement] = useState<Element | null>(null);
-  
-  const allWallpapers = selectedElement 
-    ? mockWallpapers.filter(w => w.element === selectedElement)
-    : mockWallpapers;
+  const [wallpapers, setWallpapers] = useState<Wallpaper[]>([]);
+  const [loading, setLoading] = useState(true);
 
   const elements = Object.entries(ELEMENTS) as [Element, typeof ELEMENTS[Element]][];
+
+  useEffect(() => {
+    async function fetchWallpapers() {
+      setLoading(true);
+      
+      const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+      const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+      
+      if (!supabaseUrl || !supabaseKey) {
+        console.error('Missing Supabase config');
+        setLoading(false);
+        return;
+      }
+
+      const supabase = createClient(supabaseUrl, supabaseKey);
+      
+      let query = supabase
+        .from('wallpapers')
+        .select('*')
+        .order('created_at', { ascending: false });
+
+      if (selectedElement) {
+        query = query.eq('element', selectedElement);
+      }
+
+      const { data, error } = await query;
+
+      if (error) {
+        console.error('Error fetching wallpapers:', error);
+        setWallpapers([]);
+      } else {
+        setWallpapers(data as Wallpaper[]);
+      }
+      
+      setLoading(false);
+    }
+
+    fetchWallpapers();
+  }, [selectedElement]);
 
   return (
     <div className="min-h-screen bg-surface-950">
@@ -39,6 +76,16 @@ export default function HomePage() {
 
             {/* Right: Quick element filters */}
             <div className="flex flex-wrap gap-2">
+              <button
+                onClick={() => setSelectedElement(null)}
+                className={`px-3 py-1.5 rounded-full text-sm transition-all ${
+                  selectedElement === null
+                    ? 'bg-genshin-gold text-surface-950'
+                    : 'bg-surface-800 text-surface-400 hover:bg-surface-700'
+                }`}
+              >
+                全部
+              </button>
               {elements.map(([key, value]) => (
                 <button
                   key={key}
@@ -70,7 +117,7 @@ export default function HomePage() {
           <h2 className="text-xl font-bold text-white">
             {selectedElement ? ELEMENTS[selectedElement].name_cn + '元素壁纸' : '全部壁纸'}
             <span className="text-surface-500 text-sm font-normal ml-2">
-              ({allWallpapers.length} 张)
+              ({wallpapers.length} 张)
             </span>
           </h2>
           <div className="flex gap-2">
@@ -90,9 +137,15 @@ export default function HomePage() {
           </div>
         </div>
         
-        <WallpaperGrid wallpapers={allWallpapers} columns={5} />
-        
-        {allWallpapers.length === 0 && (
+        {loading ? (
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
+            {Array.from({ length: 10 }).map((_, i) => (
+              <div key={i} className="aspect-[3/4] bg-surface-800 rounded-xl animate-pulse" />
+            ))}
+          </div>
+        ) : wallpapers.length > 0 ? (
+          <WallpaperGrid wallpapers={wallpapers} columns={5} />
+        ) : (
           <div className="text-center py-12">
             <p className="text-surface-400">暂无壁纸</p>
           </div>

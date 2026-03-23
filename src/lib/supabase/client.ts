@@ -1,9 +1,24 @@
-import { createClient } from "@supabase/supabase-js";
-import type { Database } from "./database.types";
+import { createClient, SupabaseClient } from '@supabase/supabase-js';
 
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
-const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
+let supabaseInstance: SupabaseClient | null = null;
 
-export const supabase = createClient<Database>(supabaseUrl, supabaseAnonKey);
+export function getSupabase(): SupabaseClient {
+  if (supabaseInstance) {
+    return supabaseInstance;
+  }
 
-export type SupabaseClient = typeof supabase;
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+  if (!supabaseUrl || !supabaseAnonKey) {
+    throw new Error('Missing Supabase environment variables');
+  }
+
+  supabaseInstance = createClient(supabaseUrl, supabaseAnonKey);
+  return supabaseInstance;
+}
+
+// 用于客户端组件
+export const supabase = typeof window !== 'undefined' 
+  ? getSupabase() 
+  : null as unknown as SupabaseClient;

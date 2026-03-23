@@ -31,6 +31,10 @@ yarn-error.log*
 # vercel
 .vercel
 
+# wallpaper downloads and processed files
+/downloads/
+/processed/
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts

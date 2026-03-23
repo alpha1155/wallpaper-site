@@ -1,27 +1,13 @@
-import { notFound } from 'next/navigation';
-import { mockWallpapers, getWallpaperWithCharacters } from '@/lib/mock-data';
-import { WallpaperDetailClient } from './WallpaperDetailClient';
+import { WallpaperDetailPage } from './WallpaperDetailPage';
 
 interface Props {
   params: Promise<{ slug: string; locale: string }>;
 }
 
-export function generateStaticParams() {
-  return mockWallpapers.map((wallpaper) => ({
-    slug: wallpaper.slug,
-  }));
-}
+// 动态渲染，不在构建时生成
+export const dynamic = 'force-dynamic';
 
 export default async function WallpaperPage({ params }: Props) {
   const { slug } = await params;
-  
-  const wallpaper = mockWallpapers.find((w) => w.slug === slug);
-
-  if (!wallpaper) {
-    notFound();
-  }
-
-  const wallpaperWithCharacters = getWallpaperWithCharacters(wallpaper);
-
-  return <WallpaperDetailClient wallpaper={wallpaperWithCharacters} />;
+  return <WallpaperDetailPage slug={slug} />;
 }
