@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { useTranslations } from 'next-intl';
 import { Link } from '@/i18n/routing';
 import { ArrowLeft } from 'lucide-react';
 import { createClient } from '@supabase/supabase-js';
@@ -12,20 +13,22 @@ interface Props {
 }
 
 // 角色名称映射
-const CHARACTER_NAMES: Record<string, { name_cn: string; name_en: string }> = {
-  'raiden-shogun': { name_cn: '雷电将军', name_en: 'Raiden Shogun' },
-  'hu-tao': { name_cn: '胡桃', name_en: 'Hu Tao' },
-  'nahida': { name_cn: '纳西妲', name_en: 'Nahida' },
-  'furina': { name_cn: '芙宁娜', name_en: 'Furina' },
-  'zhongli': { name_cn: '钟离', name_en: 'Zhongli' },
-  'ayaka': { name_cn: '神里绫华', name_en: 'Ayaka' },
-  'kazuha': { name_cn: '枫原万叶', name_en: 'Kazuha' },
-  'ganyu': { name_cn: '甘雨', name_en: 'Ganyu' },
-  'xiao': { name_cn: '魈', name_en: 'Xiao' },
-  'yae-miko': { name_cn: '八重神子', name_en: 'Yae Miko' },
+const CHARACTER_NAMES: Record<string, { name_cn: string; name_en: string; name_ja: string }> = {
+  'raiden-shogun': { name_cn: '雷电将军', name_en: 'Raiden Shogun', name_ja: '雷電将軍' },
+  'hu-tao': { name_cn: '胡桃', name_en: 'Hu Tao', name_ja: '胡桃' },
+  'nahida': { name_cn: '纳西妲', name_en: 'Nahida', name_ja: 'ナヒーダ' },
+  'furina': { name_cn: '芙宁娜', name_en: 'Furina', name_ja: 'フリーナ' },
+  'zhongli': { name_cn: '钟离', name_en: 'Zhongli', name_ja: '鍾離' },
+  'ayaka': { name_cn: '神里绫华', name_en: 'Ayaka', name_ja: '神里綾華' },
+  'kazuha': { name_cn: '枫原万叶', name_en: 'Kazuha', name_ja: '楓原万葉' },
+  'ganyu': { name_cn: '甘雨', name_en: 'Ganyu', name_ja: '甘雨' },
+  'xiao': { name_cn: '魈', name_en: 'Xiao', name_ja: '魈' },
+  'yae-miko': { name_cn: '八重神子', name_en: 'Yae Miko', name_ja: '八重神子' },
 };
 
 export function CharacterDetailPage({ slug }: Props) {
+  const t = useTranslations('characters');
+  const tc = useTranslations('common');
   const [wallpapers, setWallpapers] = useState<Wallpaper[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -44,7 +47,6 @@ export function CharacterDetailPage({ slug }: Props) {
 
       const supabase = createClient(supabaseUrl, supabaseKey);
 
-      // 搜索包含该角色的壁纸
       const { data, error } = await supabase
         .from('wallpapers')
         .select('*')
@@ -73,7 +75,7 @@ export function CharacterDetailPage({ slug }: Props) {
           className="inline-flex items-center gap-2 text-surface-400 hover:text-genshin-gold mb-6 transition-colors"
         >
           <ArrowLeft className="w-4 h-4" />
-          返回角色列表
+          {t('backToList')}
         </Link>
 
         {/* Character Header */}
@@ -96,13 +98,13 @@ export function CharacterDetailPage({ slug }: Props) {
         ) : wallpapers.length > 0 ? (
           <>
             <p className="text-surface-400 mb-6">
-              {wallpapers.length} 张壁纸
+              {tc('wallpaperCount', { count: wallpapers.length })}
             </p>
             <WallpaperGrid wallpapers={wallpapers} columns={5} />
           </>
         ) : (
           <div className="text-center py-12">
-            <p className="text-surface-400">暂无该角色的壁纸</p>
+            <p className="text-surface-400">{tc('noWallpapers')}</p>
           </div>
         )}
       </div>

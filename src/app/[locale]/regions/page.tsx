@@ -3,16 +3,11 @@
 import { useTranslations } from 'next-intl';
 import { Link } from '@/i18n/routing';
 import { REGIONS, Region } from '@/types/genshin';
-import { mockWallpapers } from '@/lib/mock-data';
 
 export default function RegionsPage() {
   const t = useTranslations('regions');
+  const tc = useTranslations('common');
   const regions = Object.entries(REGIONS) as [Region, typeof REGIONS[Region]][];
-
-  // Count wallpapers per region
-  const getRegionCount = (region: Region) => {
-    return mockWallpapers.filter(w => w.region === region).length;
-  };
 
   return (
     <div className="min-h-screen bg-surface-950">
@@ -38,13 +33,13 @@ export default function RegionsPage() {
               <div className="absolute inset-0 bg-gradient-to-t from-surface-950 via-surface-950/50 to-transparent" />
               <div className="absolute inset-0 flex flex-col items-center justify-center">
                 <span className="text-white font-bold text-2xl md:text-3xl group-hover:text-genshin-gold transition-colors mb-2">
-                  {value.name_cn}
+                  {t(key)}
                 </span>
                 <span className="text-surface-400 text-lg">
                   {value.name}
                 </span>
                 <span className="text-surface-500 text-sm mt-2">
-                  {getRegionCount(key)} 张壁纸
+                  {tc('viewAll')}
                 </span>
               </div>
             </Link>

@@ -9,7 +9,11 @@
     "noResults": "結果が見つかりません",
     "viewAll": "すべて見る",
     "backToHome": "ホームに戻る",
-    "all": "すべて"
+    "back": "戻る",
+    "all": "すべて",
+    "wallpaperCount": "{count}枚の壁紙",
+    "noWallpapers": "壁紙がありません",
+    "noDownloadOptions": "ダウンロードオプションがありません"
   },
   "nav": {
     "home": "ホーム",
@@ -19,26 +23,39 @@
     "elements": "元素"
   },
   "home": {
-    "badge": "高画質原神壁紙",
+    "badge": "HD原神壁紙",
     "titlePart1": "美しい",
-    "titlePart2": "原神壁紙を発見",
-    "subtitle": "すべてのキャラクターとシーンを含む4K高画質壁紙をダウンロード。モバイル、デスクトップ、ウルトラワイド対応。",
-    "browseCharacters": "キャラクターを見る",
+    "titlePart2": "原神HD壁紙を発見",
+    "subtitle": "全キャラクターとシーンの4K高画質壁紙をダウンロード。モバイル、デスクトップ、ウルトラワイドに対応。",
+    "browseCharacters": "キャラクター一覧",
     "downloadNow": "今すぐダウンロード",
-    "featured": "おすすめの壁紙",
+    "featured": "おすすめ壁紙",
     "popular": "人気の壁紙",
     "latest": "最新の壁紙",
     "byElement": "元素で探す",
     "byRegion": "地域で探す",
-    "viewAll": "すべて見る"
+    "byCharacter": "キャラクターで探す",
+    "viewAll": "すべて見る",
+    "allWallpapers": "すべての壁紙",
+    "elementWallpapers": "{element}の壁紙"
   },
   "characters": {
     "title": "全キャラクター",
-    "subtitle": "キャラクターを選択して壁紙を見る",
-    "filterByElement": "元素でフィルター",
-    "filterByRegion": "地域でフィルター",
-    "filterByRarity": "レアリティでフィルター",
-    "wallpaperCount": "{count} 枚の壁紙"
+    "subtitle": "キャラクターを選んで壁紙を見る",
+    "filterByElement": "元素で絞り込み",
+    "filterByRegion": "地域で絞り込み",
+    "filterByRarity": "レアリティで絞り込み",
+    "wallpaperCount": "{count}枚の壁紙",
+    "backToList": "キャラクター一覧に戻る"
+  },
+  "elements": {
+    "pyro": "炎",
+    "hydro": "水",
+    "anemo": "風",
+    "electro": "雷",
+    "dendro": "草",
+    "cryo": "氷",
+    "geo": "岩"
   },
   "wallpaper": {
     "downloadOptions": "ダウンロードオプション",
@@ -55,7 +72,7 @@
     "screenshot": "スクリーンショット",
     "artist": "アーティスト",
     "tags": "タグ",
-    "relatedWallpapers": "関連する壁紙",
+    "relatedWallpapers": "関連壁紙",
     "downloadCount": "ダウンロード数",
     "viewCount": "閲覧数"
   },
@@ -67,21 +84,26 @@
     "inazuma": "稲妻",
     "sumeru": "スメール",
     "fontaine": "フォンテーヌ",
-    "natlan": "ナタ"
+    "natlan": "ナタ",
+    "snezhnaya": "スネージナヤ"
+  },
+  "search": {
+    "title": "壁紙を検索",
+    "found": "{count}枚の壁紙が見つかりました"
   },
   "footer": {
-    "description": "高品質な原神壁紙ダウンロードサイト。4K HD壁紙をモバイルとデスクトップ向けに提供。",
-    "disclaimer": "これは非公式ファンサイトです。miHoYo/HoYoverseとは関係ありません。",
+    "description": "高品質な原神壁紙ダウンロードサイト。モバイルとデスクトップ用の4K HD壁紙。",
+    "disclaimer": "非公式ファンサイトです。miHoYo/HoYoverseとは関係ありません。",
     "elements": "元素",
     "regions": "地域",
     "links": "クイックリンク",
     "copyright": "全著作権所有"
   },
   "meta": {
-    "homeTitle": "GenshinWalls - 原神高画質壁紙",
-    "homeDesc": "原神の高品質壁紙を無料ダウンロード。全キャラクターとシーンを4K、2K、モバイル、デスクトップ解像度で。",
+    "homeTitle": "GenshinWalls - 原神HD壁紙ダウンロード",
+    "homeDesc": "無料で高品質な原神壁紙をダウンロード。全キャラクターとシーンを4K、2K、モバイル、デスクトップ解像度で提供。",
     "charactersTitle": "原神キャラクター壁紙",
-    "charactersDesc": "すべての原神キャラクター壁紙を見る。元素、地域、レアリティでフィルター。",
+    "charactersDesc": "全ての原神キャラクター壁紙を閲覧。元素、地域、レアリティで絞り込み。",
     "searchTitle": "壁紙を検索"
   }
 }

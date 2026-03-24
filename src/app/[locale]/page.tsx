@@ -10,6 +10,8 @@ import { createClient } from '@supabase/supabase-js';
 
 export default function HomePage() {
   const t = useTranslations('home');
+  const tc = useTranslations('common');
+  const te = useTranslations('elements');
   const [selectedElement, setSelectedElement] = useState<Element | null>(null);
   const [wallpapers, setWallpapers] = useState<Wallpaper[]>([]);
   const [loading, setLoading] = useState(true);
@@ -55,6 +57,10 @@ export default function HomePage() {
     fetchWallpapers();
   }, [selectedElement]);
 
+  const getElementName = (key: Element) => {
+    return te(key);
+  };
+
   return (
     <div className="min-h-screen bg-surface-950">
       {/* Compact Hero Section */}
@@ -84,7 +90,7 @@ export default function HomePage() {
                     : 'bg-surface-800 text-surface-400 hover:bg-surface-700'
                 }`}
               >
-                全部
+                {tc('all')}
               </button>
               {elements.map(([key, value]) => (
                 <button
@@ -103,7 +109,7 @@ export default function HomePage() {
                     className="w-2.5 h-2.5 rounded-full"
                     style={{ backgroundColor: value.color }}
                   />
-                  {value.name_cn}
+                  {getElementName(key)}
                 </button>
               ))}
             </div>
@@ -115,9 +121,9 @@ export default function HomePage() {
       <section className="container mx-auto px-4 py-8">
         <div className="flex items-center justify-between mb-6">
           <h2 className="text-xl font-bold text-white">
-            {selectedElement ? ELEMENTS[selectedElement].name_cn + '元素壁纸' : '全部壁纸'}
+            {selectedElement ? t('elementWallpapers', { element: getElementName(selectedElement) }) : t('allWallpapers')}
             <span className="text-surface-500 text-sm font-normal ml-2">
-              ({wallpapers.length} 张)
+              ({tc('wallpaperCount', { count: wallpapers.length })})
             </span>
           </h2>
           <div className="flex gap-2">
@@ -125,14 +131,14 @@ export default function HomePage() {
               href="/characters"
               className="text-sm text-surface-400 hover:text-genshin-gold transition-colors"
             >
-              按角色浏览
+              {t('byCharacter')}
             </Link>
             <span className="text-surface-600">|</span>
             <Link
               href="/regions"
               className="text-sm text-surface-400 hover:text-genshin-gold transition-colors"
             >
-              按地区浏览
+              {t('byRegion')}
             </Link>
           </div>
         </div>
@@ -147,7 +153,7 @@ export default function HomePage() {
           <WallpaperGrid wallpapers={wallpapers} columns={5} />
         ) : (
           <div className="text-center py-12">
-            <p className="text-surface-400">暂无壁纸</p>
+            <p className="text-surface-400">{tc('noWallpapers')}</p>
           </div>
         )}
       </section>

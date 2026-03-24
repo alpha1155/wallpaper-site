@@ -9,7 +9,11 @@
     "noResults": "未找到结果",
     "viewAll": "查看全部",
     "backToHome": "返回首页",
-    "all": "全部"
+    "back": "返回",
+    "all": "全部",
+    "wallpaperCount": "{count} 张壁纸",
+    "noWallpapers": "暂无壁纸",
+    "noDownloadOptions": "暂无下载选项"
   },
   "nav": {
     "home": "首页",
@@ -30,7 +34,10 @@
     "latest": "最新壁纸",
     "byElement": "按元素浏览",
     "byRegion": "按地区浏览",
-    "viewAll": "查看全部"
+    "byCharacter": "按角色浏览",
+    "viewAll": "查看全部",
+    "allWallpapers": "全部壁纸",
+    "elementWallpapers": "{element}元素壁纸"
   },
   "characters": {
     "title": "全部角色",
@@ -38,7 +45,17 @@
     "filterByElement": "按元素筛选",
     "filterByRegion": "按地区筛选",
     "filterByRarity": "按稀有度筛选",
-    "wallpaperCount": "{count} 张壁纸"
+    "wallpaperCount": "{count} 张壁纸",
+    "backToList": "返回角色列表"
+  },
+  "elements": {
+    "pyro": "火",
+    "hydro": "水",
+    "anemo": "风",
+    "electro": "雷",
+    "dendro": "草",
+    "cryo": "冰",
+    "geo": "岩"
   },
   "wallpaper": {
     "downloadOptions": "下载选项",
@@ -67,7 +84,12 @@
     "inazuma": "稻妻",
     "sumeru": "须弥",
     "fontaine": "枫丹",
-    "natlan": "纳塔"
+    "natlan": "纳塔",
+    "snezhnaya": "至冬"
+  },
+  "search": {
+    "title": "搜索壁纸",
+    "found": "找到 {count} 张壁纸"
   },
   "footer": {
     "description": "高质量原神壁纸下载站，提供4K高清壁纸，支持手机和桌面。",

@@ -9,7 +9,8 @@ import { createClient } from '@supabase/supabase-js';
 import { Element, Wallpaper } from '@/types/genshin';
 
 export default function SearchPage() {
-  const t = useTranslations();
+  const t = useTranslations('search');
+  const tc = useTranslations('common');
   const [query, setQuery] = useState('');
   const [selectedElement, setSelectedElement] = useState<Element | null>(null);
   const [wallpapers, setWallpapers] = useState<Wallpaper[]>([]);
@@ -63,7 +64,7 @@ export default function SearchPage() {
         {/* Header */}
         <div className="text-center mb-12">
           <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">
-            {t('meta.searchTitle')}
+            {t('title')}
           </h1>
 
           {/* Search Input */}
@@ -73,7 +74,7 @@ export default function SearchPage() {
               type="text"
               value={query}
               onChange={(e) => setQuery(e.target.value)}
-              placeholder={t('common.searchPlaceholder')}
+              placeholder={tc('searchPlaceholder')}
               className="w-full pl-12 pr-4 py-4 rounded-xl bg-surface-900 border border-surface-700 text-white placeholder:text-surface-500 focus:border-genshin-gold focus:ring-1 focus:ring-genshin-gold outline-none transition-all"
             />
           </div>
@@ -97,13 +98,13 @@ export default function SearchPage() {
         ) : wallpapers.length > 0 ? (
           <>
             <p className="text-surface-400 mb-6">
-              找到 {wallpapers.length} 张壁纸
+              {t('found', { count: wallpapers.length })}
             </p>
             <WallpaperGrid wallpapers={wallpapers} />
           </>
         ) : (
           <div className="text-center py-12">
-            <p className="text-surface-400">{t('common.noResults')}</p>
+            <p className="text-surface-400">{tc('noResults')}</p>
           </div>
         )}
       </div>

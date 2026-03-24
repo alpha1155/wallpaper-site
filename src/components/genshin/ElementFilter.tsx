@@ -1,5 +1,6 @@
 'use client';
 
+import { useTranslations } from 'next-intl';
 import { Element, ELEMENTS } from '@/types/genshin';
 import { cn } from '@/lib/utils';
 
@@ -9,6 +10,8 @@ interface ElementFilterProps {
 }
 
 export function ElementFilter({ selected, onChange }: ElementFilterProps) {
+  const tc = useTranslations('common');
+  const te = useTranslations('elements');
   const elements = Object.entries(ELEMENTS) as [Element, typeof ELEMENTS[Element]][];
 
   return (
@@ -22,7 +25,7 @@ export function ElementFilter({ selected, onChange }: ElementFilterProps) {
             : "bg-surface-800 text-surface-400 hover:bg-surface-700"
         )}
       >
-        全部
+        {tc('all')}
       </button>
       {elements.map(([key, value]) => (
         <button
@@ -42,7 +45,7 @@ export function ElementFilter({ selected, onChange }: ElementFilterProps) {
             className="w-3 h-3 rounded-full"
             style={{ backgroundColor: value.color }}
           />
-          {value.name_cn}
+          {te(key)}
         </button>
       ))}
     </div>

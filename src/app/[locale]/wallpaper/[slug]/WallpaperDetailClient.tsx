@@ -36,6 +36,9 @@ interface Props {
 
 export function WallpaperDetailClient({ wallpaper }: Props) {
   const t = useTranslations('wallpaper');
+  const tc = useTranslations('common');
+  const te = useTranslations('elements');
+  const tr = useTranslations('regions');
   
   // Safe access to element and region info
   const elementKey = wallpaper.element as keyof typeof ELEMENTS | undefined;
@@ -80,7 +83,7 @@ export function WallpaperDetailClient({ wallpaper }: Props) {
           className="inline-flex items-center gap-2 text-surface-400 hover:text-genshin-gold mb-6 transition-colors"
         >
           <ArrowLeft className="w-4 h-4" />
-          返回
+          {tc('back')}
         </Link>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
@@ -118,18 +121,18 @@ export function WallpaperDetailClient({ wallpaper }: Props) {
 
             {/* Meta info */}
             <div className="space-y-3">
-              {elementInfo && (
+              {elementInfo && elementKey && (
                 <div className="flex items-center gap-2">
                   <span
                     className="w-4 h-4 rounded-full"
                     style={{ backgroundColor: elementInfo.color }}
                   />
-                  <span className="text-surface-300">{elementInfo.name_cn}</span>
+                  <span className="text-surface-300">{te(elementKey)}</span>
                 </div>
               )}
-              {regionInfo && (
+              {regionInfo && regionKey && (
                 <div className="text-surface-300">
-                  {regionInfo.name_cn} / {regionInfo.name}
+                  {tr(regionKey)}
                 </div>
               )}
               <div className="text-surface-400 text-sm">
@@ -191,7 +194,7 @@ export function WallpaperDetailClient({ wallpaper }: Props) {
                     </a>
                   ))
                 ) : (
-                  <p className="text-surface-500 text-sm">暂无下载选项</p>
+                  <p className="text-surface-500 text-sm">{tc('noDownloadOptions')}</p>
                 )}
               </div>
             </div>
